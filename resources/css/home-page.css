@@ -1,0 +1,23 @@
+.embebg {
+  transition-duration: 0.8s;
+  opacity: 0.9;
+  left: 0%;
+  top: 0%;
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.embebg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.test3 {
+  color: purple;
+}

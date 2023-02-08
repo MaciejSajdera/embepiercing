@@ -1,0 +1,24 @@
+<?php
+
+/*
+ * Template Name: Home Page Template
+ */
+
+get_header('home'); ?>
+
+<div class="container mx-auto my-8">
+    <?php if ( have_posts() ) : ?>
+    <?php
+		while ( have_posts() ) :
+			the_post();
+			?>
+
+
+    <?php endwhile; ?>
+
+    <?php endif; ?>
+
+</div>
+
+<?php
+get_footer('home');
