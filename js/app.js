@@ -92,12 +92,143 @@ var require_luxy_min = __commonJS({
 
 // resources/js/app.js
 var import_luxy = __toModule(require_luxy_min());
+
+// resources/js/utils.js
+var addSelfDestructingEventListener = (element, eventType, callback) => {
+  let handler = () => {
+    callback();
+    element.removeEventListener(eventType, handler);
+  };
+  element.addEventListener(eventType, handler);
+};
+
+// resources/js/collapseMenu.js
+function menu() {
+  const mediaQueryMobile = window.matchMedia("(max-width: 992px)");
+  const mediaQueryDesktop = window.matchMedia("(min-width: 992px)");
+  const desktopMenuNavigation = document.querySelector(".desktop-menu") || document.querySelector(".desktop-menu--home");
+  let lastScrollTop = 0;
+  function collapseSection(element) {
+    const sectionHeight = element.scrollHeight;
+    const elementTransition = element.style.transition;
+    element.style.transition = "";
+    requestAnimationFrame(function() {
+      element.style.height = sectionHeight + "px";
+      element.style.transition = elementTransition;
+      requestAnimationFrame(function() {
+        element.style.height = 0 + "px";
+      });
+    });
+    element.setAttribute("data-collapsed", "true");
+  }
+  function expandSection(element) {
+    const sectionHeight = element.scrollHeight;
+    element.style.height = sectionHeight + "px";
+    const removeHeight = function(e) {
+      element.style.height = null;
+    };
+    addSelfDestructingEventListener(element, "transitionend", removeHeight);
+    element.setAttribute("data-collapsed", "false");
+  }
+  function expandSubMenu(e) {
+    const expandSubMenuTrigger = e.target;
+    expandSubMenuTrigger.classList.toggle("show-submenu__toggled");
+    const submenu = expandSubMenuTrigger.nextElementSibling;
+    const isCollapsed = submenu.getAttribute("data-collapsed") === "true";
+    if (isCollapsed) {
+      expandSection(submenu);
+      submenu.setAttribute("data-collapsed", "false");
+      submenu.classList.add("sub-menu--expanded");
+    } else {
+      collapseSection(submenu);
+    }
+  }
+  const mobileMenu = () => {
+    const mobileMenuToggle = document.querySelector("#mobileMenuToggle");
+    if (!mobileMenuToggle)
+      return;
+    mobileMenuToggle.addEventListener("click", function(e) {
+      e.preventDefault();
+      mobileMenuWrapper.classList.toggle("toggled");
+    });
+    const nav = document.querySelector(".mobile-menu");
+    if (!nav)
+      return;
+    console.log("mobilemeny rdy");
+    const linksWithChildren = nav.querySelectorAll(".menu-item-has-children");
+    linksWithChildren.forEach((link) => {
+      if (link.querySelector(".sub-menu")) {
+        const submenu = link.querySelector(".sub-menu");
+        submenu.setAttribute("data-collapsed", "true");
+      }
+    });
+    nav.addEventListener("click", function(e) {
+      if (e.target.classList.contains("show-submenu")) {
+        expandSubMenu(e);
+      }
+    });
+  };
+  function handleMobileChange(e) {
+    if (e.matches) {
+      console.log("Media Query Mobile Matched!");
+      mobileMenu();
+    }
+  }
+  mediaQueryMobile.addListener(handleMobileChange);
+  handleMobileChange(mediaQueryMobile);
+  const desktopMenu = () => {
+    const nav = document.querySelector(".desktop-menu--home");
+    if (!nav)
+      return;
+    const linksWithChildren = nav.querySelectorAll(".menu-item-has-children");
+    linksWithChildren.forEach((link) => {
+      if (link.querySelector(".sub-menu")) {
+        const submenu = link.querySelector(".sub-menu");
+        submenu.setAttribute("data-collapsed", "true");
+      }
+    });
+    nav.addEventListener("click", function(e) {
+      if (e.target.classList.contains("show-submenu")) {
+        expandSubMenu(e);
+      }
+    });
+  };
+  function handleDesktopChange(e) {
+    if (e.matches) {
+      console.log("Media Query Desktop Matched!");
+      desktopMenu();
+    }
+    window.addEventListener("scroll", () => {
+      let st = window.pageYOffset || document.documentElement.scrollTop;
+      if (st > lastScrollTop) {
+        desktopMenuNavigation.classList.add("hide");
+      } else {
+        desktopMenuNavigation.classList.remove("hide");
+      }
+      lastScrollTop = st <= 0 ? 0 : st;
+    }, false);
+  }
+  mediaQueryDesktop.addListener(handleDesktopChange);
+  handleDesktopChange(mediaQueryDesktop);
+}
+
+// resources/js/app.js
 window.addEventListener("load", function() {
-  const main_navigation = document.querySelector("#primary-menu");
-  document.querySelector("#primary-menu-toggle").addEventListener("click", function(e) {
-    e.preventDefault();
-    main_navigation.classList.toggle("hidden");
-  });
+  menu();
+  const cookiesNotification = () => {
+    const cookiesInfo = document.querySelector(".cookie-law-notification");
+    const cookiesAcceptButton = document.querySelector("#cookie-law-button");
+    if (localStorage.getItem("cookiesAreAccepted")) {
+      return;
+    } else {
+      cookiesInfo.classList.add("cookies-notification-on");
+      cookiesAcceptButton && cookiesAcceptButton.addEventListener("click", () => {
+        localStorage.setItem("cookiesAreAccepted", "1");
+        cookiesInfo.classList.add("cookies-notification-off");
+      });
+      return;
+    }
+  };
   import_luxy.default.init();
 });
 /*! luxy.js v0.0.7 | (c) 2018 Mineo Okuda | MIT License | git+ssh://git@github.com:min30327/luxy.git */

@@ -1,15 +1,29 @@
 import luxy from "luxy.js";
+import menu from "./collapseMenu.js";
 
 // Navigation toggle
 window.addEventListener("load", function () {
-  const main_navigation = document.querySelector("#primary-menu");
+  menu();
 
-  document
-    .querySelector("#primary-menu-toggle")
-    .addEventListener("click", function (e) {
-      e.preventDefault();
-      main_navigation.classList.toggle("hidden");
-    });
+  const cookiesNotification = () => {
+    const cookiesInfo = document.querySelector(".cookie-law-notification");
+    const cookiesAcceptButton = document.querySelector("#cookie-law-button");
+
+    if (localStorage.getItem("cookiesAreAccepted")) {
+      return;
+    } else {
+      cookiesInfo.classList.add("cookies-notification-on");
+      cookiesAcceptButton &&
+        cookiesAcceptButton.addEventListener("click", () => {
+          localStorage.setItem("cookiesAreAccepted", "1");
+          cookiesInfo.classList.add("cookies-notification-off");
+        });
+      return;
+    }
+
+    //temp
+    // cookiesInfo.classList.add("cookies-notification-on");
+  };
 
   luxy.init();
 });

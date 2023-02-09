@@ -10,8 +10,6 @@ export default function createObserverHeroImage() {
 
   const fadeBgImage = (entries, observer) => {
     entries.forEach((entry) => {
-      console.log(entry);
-
       if (entry.isIntersecting) {
         heroElement.classList.add("fadeIn");
         heroElement.classList.remove("fadeOut");
@@ -32,7 +30,6 @@ export default function createObserverHeroImage() {
 
 export function createObserverZoomInOutImgs() {
   const heroScreenMarkers = document.querySelectorAll(".zoom-in-out");
-  const heroElement = document.querySelector(".zoom-in-out");
 
   let options = {
     root: null,
@@ -42,8 +39,6 @@ export function createObserverZoomInOutImgs() {
 
   const zoomInImg = (entries, observer) => {
     entries.forEach((entry) => {
-      console.log(entry.target);
-
       if (entry.isIntersecting) {
         entry.target.classList.add("zoomOut");
         entry.target.classList.remove("zoomIn");
