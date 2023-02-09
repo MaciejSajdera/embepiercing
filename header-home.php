@@ -10,27 +10,20 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class( 'bg-dark text-light antialiased' ); ?>>
+<body <?php body_class( 'bg-black text-white antialiased font-josephin' ); ?>>
 
     <?php do_action( 'tailpress_site_before' ); ?>
 
-    <div id="fixedMenu" class="fixed z-20 left-8">
-        <div class=" lg:flex lg:justify-between lg:items-center py-6">
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-message-holder"></div>
+        </div>
+    </div>
+
+    <div id="fixedMenu" class="fixed z-40 left-8 h-full flex flex-col justify-between">
+        <div class="py-12">
             <div class="flex justify-between items-center">
-                <div>
-                    <?php if ( has_custom_logo() ) { ?>
-                    <?php the_custom_logo(); ?>
-                    <?php } else { ?>
-                    <!-- <a href="<?php echo get_bloginfo( 'url' ); ?>" class="font-extrabold text-lg uppercase">
-                            <?php echo get_bloginfo( 'name' ); ?>
-                        </a> -->
-
-                    <!-- <p class="text-sm font-light text-gray-600">
-                            <?php echo get_bloginfo( 'description' ); ?>
-                        </p> -->
-
-                    <?php } ?>
-                </div>
 
                 <div class="lg:hidden">
                     <a href="#" aria-label="Toggle navigation" id="primary-menu-toggle">
@@ -52,10 +45,10 @@
 				wp_nav_menu(
 					array(
 						'container_id'    => 'primary-menu',
-						'container_class' => 'hidden bg-dark mt-4 p-4 lg:mt-0 lg:p-0 lg:bg-dark lg:block',
+						'container_class' => 'hidden bg-black mt-4 p-4 lg:mt-0 lg:p-0 lg:bg-black lg:block',
 						'menu_class'      => 'lg:flex lg:-mx-4 flex-col',
 						'theme_location'  => 'primary',
-						'li_class'        => 'lg:mx-4',
+						'li_class'        => 'lg:mx-4 uppercase text-md font-bold',
 						'fallback_cb'     => false,
 					)
 				);
@@ -69,38 +62,45 @@
             </div>
         </div>
 
+        <div class="socials py-8 flex flex-col">
+            <a href="" class="instagram">ig</a>
+            <a href="" class="facebook">fb</a>
+        </div>
+
     </div>
 
-    <div class="embebg z-10">
+    <div id="heroImageHolder" class="embebg z-10">
 
         <?php $welcome_view_image = get_field('welcome_view_image'); ?>
 
-        <img src="<?php echo $welcome_view_image['url']; ?>" alt="<?php echo $welcome_view_image['alt']; ?>" />
+        <img src=<?php echo $welcome_view_image['url']; ?>" alt="<?php echo $welcome_view_image['alt']; ?>" />
 
     </div>
 
+
     <div id="luxy" class="z-30">
 
-        <di id="page" class="min-h-screen flex flex-col">
+        <div id="page" class="relative min-h-screen flex flex-col">
 
             <?php do_action( 'tailpress_header' ); ?>
 
             <header class="min-h-screen flex flex-col justify-end">
-                <div class="absolute top-8 right-8">
+                <div class="absolute top-20 right-32">
+                    <span id="heroScreenMarker" class="absolute -bottom-100 h-4 w-4"></span>
                     <p>PIERCING ARTIST BASED</p>
                     <p>IN CRACOW</p>
                 </div>
-                <div class="flex justify-end p-8">
-                    <div class="lg:flex lg:justify-between lg:items-center py-6">
+                <div class=" flex justify-end px-8 py-8">
+                    <div class="lg:flex lg:justify-between lg:items-center">
 
                         <div class="flex flex-col text-right">
                             <div className="embe-piercing title-reveal w-full">
-                                <h1 class="text-9xl">
+                                <h1 class="text-5xl md:text-9xl">
                                     EMBE
                                 </h1>
                             </div>
                             <div className="embe-piercing title-reveal w-full">
-                                <h1 class="text-9xl">
+                                <h1 class="text-5xl md:text-9xl">
                                     PIERCING
                                 </h1>
                             </div>
@@ -110,16 +110,6 @@
             </header>
 
             <div id="content" class="site-content">
-
-                <section class="min-h-screen">
-                    section1
-                </section>
-                <section class="min-h-screen">
-                    section2
-                </section>
-                <section class="min-h-screen">
-                    section3
-                </section>
 
                 <?php do_action( 'tailpress_content_start' ); ?>
 

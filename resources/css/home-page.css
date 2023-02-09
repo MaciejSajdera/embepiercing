@@ -1,5 +1,6 @@
-.embebg {
+#heroImageHolder {
   transition-duration: 0.8s;
+  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
   opacity: 0.9;
   left: 0%;
   top: 0%;
@@ -11,13 +12,24 @@
   align-items: center;
 }
 
-.embebg img {
+#heroImageHolder.fadeOut {
+  opacity: 0.3;
+}
+
+#heroImageHolder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.test3 {
-  color: purple;
+.zoom-in-out {
+  transform: scale3d(1.4, 1.4, 1.4);
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.zoomOut {
+  transform: scale3d(1, 1, 1);
 }

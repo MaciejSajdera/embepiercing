@@ -3,12 +3,12 @@
 /**
  * Theme setup.
  */
-function tailpress_setup() {
+function embepiercing_setup() {
 	add_theme_support( 'title-tag' );
 
 	register_nav_menus(
 		array(
-			'primary' => __( 'Primary Menu', 'tailpress' ),
+			'primary' => __( 'Primary Menu', 'embepiercing' ),
 		)
 	);
 
@@ -28,24 +28,26 @@ function tailpress_setup() {
 
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'wp-block-styles' );
-
-	add_theme_support( 'editor-styles' );
-	add_editor_style( 'css/editor-style.css' );
 }
 
-add_action( 'after_setup_theme', 'tailpress_setup' );
+add_action( 'after_setup_theme', 'embepiercing_setup' );
 
 /**
  * Enqueue theme assets.
  */
-function tailpress_enqueue_scripts() {
+function embepiercing_enqueue_scripts() {
 	$theme = wp_get_theme();
 
-	wp_enqueue_style( 'tailpress', tailpress_asset( 'css/app.css' ), array(), $theme->get( 'Version' ) );
-	wp_enqueue_script( 'tailpress', tailpress_asset( 'js/app.js' ), array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), $theme->get( 'Version' ) );
+	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), $theme->get( 'Version' ) );
+
+	if (is_front_page()) {
+		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), $theme->get( 'Version' ) );
+	}
 }
 
-add_action( 'wp_enqueue_scripts', 'tailpress_enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', 'embepiercing_enqueue_scripts' );
 
 /**
  * Get asset path.
@@ -54,7 +56,7 @@ add_action( 'wp_enqueue_scripts', 'tailpress_enqueue_scripts' );
  *
  * @return string
  */
-function tailpress_asset( $path ) {
+function embepiercing_asset( $path ) {
 	if ( wp_get_environment_type() === 'production' ) {
 		return get_stylesheet_directory_uri() . '/' . $path;
 	}
@@ -97,7 +99,7 @@ function header_copyright()
  *
  * @return array
  */
-function tailpress_nav_menu_add_li_class( $classes, $item, $args, $depth ) {
+function embepiercing_nav_menu_add_li_class( $classes, $item, $args, $depth ) {
 	if ( isset( $args->li_class ) ) {
 		$classes[] = $args->li_class;
 	}
@@ -109,7 +111,7 @@ function tailpress_nav_menu_add_li_class( $classes, $item, $args, $depth ) {
 	return $classes;
 }
 
-add_filter( 'nav_menu_css_class', 'tailpress_nav_menu_add_li_class', 10, 4 );
+add_filter( 'nav_menu_css_class', 'embepiercing_nav_menu_add_li_class', 10, 4 );
 
 /**
  * Adds option 'submenu_class' to 'wp_nav_menu'.
@@ -120,7 +122,7 @@ add_filter( 'nav_menu_css_class', 'tailpress_nav_menu_add_li_class', 10, 4 );
  *
  * @return array
  */
-function tailpress_nav_menu_add_submenu_class( $classes, $args, $depth ) {
+function embepiercing_nav_menu_add_submenu_class( $classes, $args, $depth ) {
 	if ( isset( $args->submenu_class ) ) {
 		$classes[] = $args->submenu_class;
 	}
@@ -132,7 +134,7 @@ function tailpress_nav_menu_add_submenu_class( $classes, $args, $depth ) {
 	return $classes;
 }
 
-add_filter( 'nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class', 10, 3 );
+add_filter( 'nav_menu_submenu_css_class', 'embepiercing_nav_menu_add_submenu_class', 10, 3 );
 
 function add_img_size($content) {
 	$pattern = '/<img [^>]*?src="(https?:\/\/[^"]+?)"[^>]*?>/iu';
@@ -154,4 +156,92 @@ $replaced_img = str_replace( '<img ', ' <img ' . $img_size[3] . ' ', $imgs[0][$i
 	return $content;
 }
 
-add_filter(' the_content','add_img_size'); /* YOAST */ // Move Yoast to the bottom of WP page/post editor add_filter( 'wpseo_metabox_prio' , function() { return 'low' ; } ); //Increase size of yoast fb image for better quality function set_custom_facebook_image_size( $img_size ) { return 'large' ; } add_filter( 'wpseo_opengraph_image_size' , 'set_custom_facebook_image_size' ); /* Security */ /* Block external access to xmlrpc */ add_filter('xmlrpc_enabled', '__return_false' );
+/* MENUS */
+
+// Mobile menu
+
+add_filter("wp_nav_menu_objects", "wpdocs_add_menu_parent_class", 11, 3);
+
+function wpdocs_add_menu_parent_class($items)
+{
+	$parents = [];
+
+	// Collect menu items with parents.
+	foreach ($items as $item) {
+		if ($item->menu_item_parent && $item->menu_item_parent > 0) {
+			$parents[] = $item->menu_item_parent;
+		}
+	}
+
+	// Add class.
+	foreach ($items as $item) {
+		if (in_array($item->ID, $parents)) {
+			$item->classes[] = "menu-parent-link"; //here attach the class
+			// $item->title .= ' <span class="show-submenu"></span>';
+		}
+	}
+
+	return $items;
+}
+
+function prefix_add_button_after_menu_item_children(
+	$item_output,
+	$item,
+	$depth,
+	$args
+) {
+	if (
+		in_array("menu-item-has-children", $item->classes) ||
+		in_array("page_item_has_children", $item->classes)
+	) {
+		$item_output = str_replace(
+			$args->link_after . "</a>",
+			$args->link_after .
+				'</a><span class="show-submenu" aria-expanded="false" aria-pressed="false"></span>',
+			$item_output
+		);
+	}
+
+	return $item_output;
+}
+add_filter(
+	"walker_nav_menu_start_el",
+	"prefix_add_button_after_menu_item_children",
+	10,
+	4
+);
+
+class Has_Child_Walker_Nav_Menu extends Walker_Nav_Menu
+{
+	public function display_element(
+		$element,
+		&$children_elements,
+		$max_depth,
+		$depth,
+		$args,
+		&$output
+	) {
+		if (!$element) {
+			return;
+		}
+		$element->has_children = !empty(
+			$children_elements[$element->{$this->db_fields["id"]}]
+		);
+		parent::display_element(
+			$element,
+			$children_elements,
+			$max_depth,
+			$depth,
+			$args,
+			$output
+		);
+	}
+}
+
+function set_custom_facebook_image_size( $img_size ) { return 'large' ; };
+add_filter( 'wpseo_opengraph_image_size' , 'set_custom_facebook_image_size' );
+
+add_filter(' the_content','add_img_size');
+add_filter( 'wpseo_metabox_prio' , function() { return 'low' ; } );
+
+add_filter('xmlrpc_enabled', '__return_false' );

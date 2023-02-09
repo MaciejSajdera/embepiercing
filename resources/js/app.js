@@ -2,9 +2,7 @@ import luxy from "luxy.js";
 
 // Navigation toggle
 window.addEventListener("load", function () {
-  let main_navigation = document.querySelector("#primary-menu");
-
-  luxy.init();
+  const main_navigation = document.querySelector("#primary-menu");
 
   document
     .querySelector("#primary-menu-toggle")
@@ -12,4 +10,6 @@ window.addEventListener("load", function () {
       e.preventDefault();
       main_navigation.classList.toggle("hidden");
     });
+
+  luxy.init();
 });

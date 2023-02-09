@@ -10,13 +10,16 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class( 'bg-dark text-light antialiased' ); ?>>
+<body <?php body_class( 'bg-black text-white antialiased font-josephin' ); ?>>
 
-    <?php do_action( 'tailpress_site_before' ); ?>
+    <?php do_action( 'embepiercing_site_before' ); ?>
+
+
+    <div id="luxy" class="z-30">
 
     <div id="page" class="min-h-screen flex flex-col">
 
-        <?php do_action( 'tailpress_header' ); ?>
+        <?php do_action( 'embepiercing_header' ); ?>
 
         <header class="w-full">
 
@@ -70,6 +73,6 @@
         <div id="content" class="site-content flex-grow">
 
 
-            <?php do_action( 'tailpress_content_start' ); ?>
+            <?php do_action( 'embepiercing_content_start' ); ?>
 
             <main>

@@ -1,6 +1,18 @@
+<?php
+
+/*
+ * Template Name: Galerie Archive Template
+ * description: >-
+  Page template without sidebar
+ */
+
+ ?>
+
 <?php get_header(); ?>
 
-<div class="container mx-auto my-8">
+<div class="container my-8 mx-auto">
+
+    galerie
 
     <?php if ( have_posts() ) : ?>
     <?php
