@@ -15,7 +15,7 @@ $bio_2_image = get_field('bio_2')['bio_image'];
 
 <div class="container mx-auto mt-24">
 
-    <section class="min-h-screen p-4 max-w-7xl mx-auto">
+    <section class="min-h-screen">
 
         <div class="wrapper flex flex-col-reverse md:flex-row mb-36">
             <div class="shrink mb-16 md:mr-16 md:mb-0 md:w-2/3">
@@ -46,7 +46,12 @@ $bio_2_image = get_field('bio_2')['bio_image'];
         section3
     </section>
 
+
+    <div id="contactForm">
+        <?php echo FrmFormsController::get_form_shortcode( array( 'id' => 2 ) ); ?>
+    </div>
+
 </div>
 
 <?php
-get_footer('home');
+get_footer();

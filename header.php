@@ -14,7 +14,7 @@
 
     <?php do_action( 'embepiercing_site_before' ); ?>
 
-    <header class="w-full">
+    <header class="fixed w-full z-40">
         <div class="mx-auto container flex">
 
             <?php do_action( 'embepiercing_header' ); ?>
@@ -24,11 +24,19 @@
         </div>
     </header>
 
+    <div id="heroImageHolder" class="embebg fadeOut">
+
+        <?php $front_page_id = get_option( 'page_on_front' ); ?>
+        <?php $welcome_view_image = get_field('welcome_view_image', $front_page_id); ?>
+        <img src=<?php echo $welcome_view_image['url']; ?>" alt="<?php echo $welcome_view_image['alt']; ?>" />
+
+    </div>
+
     <div id="luxy" class="z-30">
 
         <div id="page" class="min-h-screen flex flex-col">
 
-            <div id="content" class="site-content flex-grow">
+            <div id="content" class="site-content pt-40 flex-grow">
 
                 <?php do_action( 'embepiercing_content_start' ); ?>
 

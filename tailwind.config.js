@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: "jit",
+  // mode: "jit",
   content: ["./**/*.php", "./*.php", "*.php"],
   presets: [],
   darkMode: "media", // or 'class'
@@ -41,26 +41,12 @@ module.exports = {
       fuchsia: colors.fuchsia,
       pink: colors.pink,
       rose: colors.rose,
+      gold: "rgb(224, 197, 110)",
     }),
     typography: (theme) => ({
       DEFAULT: {
         css: {
           color: theme("colors.white"),
-          // h2: {
-          //   color: theme('colors.gray.800'),
-          // },
-          // h3: {
-          //   color: theme('colors.gray.800'),
-          // },
-          // strong: {
-          //   color: theme('colors.gray.800'),
-          // },
-          // a: {
-          //   color: theme('colors.green.500'),
-          //   '&:hover': {
-          //     color: theme('colors.green.600')
-          //   },
-          // },
         },
       },
     }),
@@ -268,7 +254,15 @@ module.exports = {
       150: "1.5",
       200: "2",
     },
-    container: {},
+    container: {
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
+      },
+    },
     content: {
       none: "none",
     },

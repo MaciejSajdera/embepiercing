@@ -7,10 +7,11 @@
 <?php do_action( 'embepiercing_content_after' ); ?>
 
 
-<footer id="colophon" class="site-footer bg-gray-50 py-12" role="contentinfo">
+<footer id="colophon" class="site-footer bg-black py-20" role="contentinfo">
+
     <?php do_action( 'embepiercing_footer' ); ?>
 
-    <div class="container mx-auto text-center text-gray-500">
+    <div class="container mx-auto text-center text-gold prose">
         &copy; <?php echo date_i18n( 'Y' );?> - <?php echo get_bloginfo( 'name' );?>
     </div>
 </footer>

@@ -1,7 +1,36 @@
+header h1.title-reveal {
+  font-size: clamp(3rem, 15vw, 12rem);
+  transform: translate3d(0%, 60%, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 5deg);
+  opacity: 0;
+  line-height: 1;
+  transition: transform 1.25s cubic-bezier(0.44, 0.01, 0.38, 0.99),
+    opacity 1.5s cubic-bezier(0.44, 0.01, 0.38, 0.99);
+}
+
+header h1.title-reveal--revealed {
+  transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg)
+    rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+  opacity: 1;
+}
+
+.additional-title .title-reveal {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 1s cubic-bezier(0.44, 0.01, 0.38, 0.99),
+    opacity 1.25s cubic-bezier(0.44, 0.01, 0.38, 0.99);
+}
+
+.additional-title .title-reveal--revealed {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
 #heroImageHolder {
-  transition-duration: 0.8s;
-  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-  opacity: 0.9;
+  transition-duration: 0.75s;
+  transition-timing-function: cubic-bezier(0.44, 0.01, 0.38, 0.99);
+  opacity: 0.7;
   left: 0%;
   top: 0%;
   position: fixed;
@@ -13,7 +42,7 @@
 }
 
 #heroImageHolder.fadeOut {
-  opacity: 0.3;
+  opacity: 0.15;
 }
 
 #heroImageHolder img {

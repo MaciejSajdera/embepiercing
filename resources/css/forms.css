@@ -1,0 +1,61 @@
+#contactForm {
+  max-width: 1024px;
+  margin: auto;
+}
+
+#contactForm * {
+  font-size: clamp(3rem, 1.5vw, 4.5rem) !important;
+}
+
+#contactForm input[type="text"],
+input[type="email"],
+textarea {
+  background: transparent;
+  background-color: transparent !important;
+  width: 100%;
+  padding: 32px !important;
+  border: none !important;
+  border-bottom: 2px solid lightgray !important;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  box-shadow: none !important;
+  color: white !important;
+}
+
+#contactForm .form-field {
+  margin-bottom: 6rem !important;
+}
+
+#contactForm label {
+  color: white;
+  padding: 1.5rem;
+}
+
+#contactForm .frm_error {
+  margin-top: 1rem;
+  padding: 1.5rem;
+}
+
+#contactForm .frm_required {
+  display: none;
+}
+
+#contactForm .frm_submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+#contactForm .frm_button_submit {
+  background: transparent !important;
+  padding: 2.5rem 25%;
+  border: 2px solid white;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+}
+
+#contactForm .frm_button_submit:hover {
+  background: white !important;
+  color: black;
+}

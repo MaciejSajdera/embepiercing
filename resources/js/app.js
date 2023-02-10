@@ -1,4 +1,4 @@
-import luxy from "luxy.js";
+
 import menu from "./collapseMenu.js";
 
 // Navigation toggle
@@ -24,6 +24,4 @@ window.addEventListener("load", function () {
     //temp
     // cookiesInfo.classList.add("cookies-notification-on");
   };
-
-  luxy.init();
 });

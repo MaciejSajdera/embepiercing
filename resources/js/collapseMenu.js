@@ -1,10 +1,11 @@
 import { addSelfDestructingEventListener } from "./utils.js";
+import luxy from "luxy.js";
 
 // Setup
 export default function menu() {
   const mediaQueryMobile = window.matchMedia("(max-width: 992px)");
   const mediaQueryDesktop = window.matchMedia("(min-width: 992px)");
-  const desktopMenuNavigation =
+  const desktopMenuHomeNavigation =
     document.querySelector(".desktop-menu") ||
     document.querySelector(".desktop-menu--home");
   let lastScrollTop = 0;
@@ -70,6 +71,7 @@ export default function menu() {
   }
 
   const mobileMenu = () => {
+    const mainContent = document.querySelector("#content");
     const mobileMenuToggle = document.querySelector("#mobileMenuToggle");
 
     if (!mobileMenuToggle) return;
@@ -77,20 +79,18 @@ export default function menu() {
     mobileMenuToggle.addEventListener("click", function (e) {
       e.preventDefault();
       mobileMenuWrapper.classList.toggle("toggled");
+      mainContent.classList.toggle("overlay--active");
     });
 
     const nav = document.querySelector(".mobile-menu");
 
     if (!nav) return;
 
-    console.log("mobilemeny rdy");
-
     const linksWithChildren = nav.querySelectorAll(".menu-item-has-children");
 
     linksWithChildren.forEach((link) => {
       if (link.querySelector(".sub-menu")) {
         const submenu = link.querySelector(".sub-menu");
-
         submenu.setAttribute("data-collapsed", "true");
       }
     });
@@ -112,8 +112,30 @@ export default function menu() {
   mediaQueryMobile.addListener(handleMobileChange);
   handleMobileChange(mediaQueryMobile);
 
-  const desktopMenu = () => {
+  const desktopMenuHome = () => {
     const nav = document.querySelector(".desktop-menu--home");
+
+    if (!nav) return;
+
+    const linksWithChildren = nav.querySelectorAll(".menu-item-has-children");
+
+    linksWithChildren.forEach((link) => {
+      if (link.querySelector(".sub-menu")) {
+        const submenu = link.querySelector(".sub-menu");
+
+        submenu.setAttribute("data-collapsed", "true");
+      }
+    });
+
+    nav.addEventListener("click", function (e) {
+      if (e.target.classList.contains("show-submenu")) {
+        expandSubMenu(e);
+      }
+    });
+  };
+
+  const desktopMenuGlobal = () => {
+    const nav = document.querySelector(".desktop-menu--global");
 
     if (!nav) return;
 
@@ -138,7 +160,9 @@ export default function menu() {
     // Check if the media query is true
     if (e.matches) {
       console.log("Media Query Desktop Matched!");
-      desktopMenu();
+      desktopMenuHome();
+      desktopMenuGlobal();
+      luxy.init();
     }
 
     window.addEventListener(
@@ -146,9 +170,9 @@ export default function menu() {
       () => {
         let st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
         if (st > lastScrollTop) {
-          desktopMenuNavigation.classList.add("hide");
+          desktopMenuHomeNavigation.classList.add("scrolled");
         } else {
-          desktopMenuNavigation.classList.remove("hide");
+          desktopMenuHomeNavigation.classList.remove("scrolled");
         }
         lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
       },
