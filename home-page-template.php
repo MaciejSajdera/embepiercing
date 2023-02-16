@@ -2,7 +2,7 @@
  /* Template Name: Home Page Template */ 
 ?>
 
-<?php get_header('home'); ?>
+<?php get_header(); ?>
 
 <?php
 

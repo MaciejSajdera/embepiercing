@@ -6,6 +6,17 @@ section {
   @apply mx-auto max-w-7xl p-4;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 a:hover {
   color: rgb(224, 197, 110);
 }
@@ -31,4 +42,16 @@ a:hover {
 
 #content.overlay--active:before {
   opacity: 1;
+}
+
+#progressBar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 8px;
+  background: rgb(224, 197, 110);
+  width: 6px;
+  border-radius: 100rem;
+  z-index: 100;
+  transition: width 0.75s linear;
 }

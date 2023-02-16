@@ -5,8 +5,6 @@ import createObserverHeroImage, {
 function revealTitle() {
   const titlesToBeRevealed = document.querySelectorAll(".title-reveal");
 
-  console.log(titlesToBeRevealed);
-
   if (!titlesToBeRevealed) return;
 
   titlesToBeRevealed.forEach((title, i) => {

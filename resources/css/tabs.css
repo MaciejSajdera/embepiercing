@@ -1,0 +1,27 @@
+.accordion__button {
+  @apply flex w-full items-center justify-between bg-gold p-5 text-left font-medium text-white;
+}
+
+.accordion__single:first-of-type button {
+  @apply rounded-t-xl;
+}
+
+.accordion__single:last-of-type button {
+  @apply rounded-b-xl;
+}
+
+.accordion__button--active {
+  @apply bg-gold;
+}
+
+.accordion__button--active svg {
+  @apply rotate-180 transform;
+}
+
+.accordion__single:last-of-type button.accordion__button--active {
+  @apply rounded-b-none;
+}
+
+.accordion__single:last-of-type .accordion__body {
+  @apply rounded-b-xl border-b-2 border-b-white;
+}

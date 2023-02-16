@@ -14,6 +14,21 @@
 
     <?php do_action( 'embepiercing_site_before' ); ?>
 
+    <?php $adultery = get_field('adultery', get_the_ID() ); ?>
+
+    <?php if ($adultery === true) : ?>
+    <?php echo get_template_part('/template-parts/partials/modal-cookies-adultery'); ?>
+    <?php echo get_template_part('/template-parts/partials/modal-cookies-adultery2'); ?>
+    <?php endif; ?>
+
+    <?php echo get_template_part('/template-parts/partials/modal-cookies-general'); ?>
+
+    <div id="progressBar"></div>
+
+    <!-- all pages  -->
+
+    <?php if (!is_front_page()): ?>
+
     <header class="fixed w-full z-40">
         <div class="mx-auto container flex">
 
@@ -26,15 +41,33 @@
 
     <div id="heroImageHolder" class="embebg fadeOut">
 
-        <?php $front_page_id = get_option( 'page_on_front' ); ?>
-        <?php $welcome_view_image = get_field('welcome_view_image', $front_page_id); ?>
-        <img src=<?php echo $welcome_view_image['url']; ?>" alt="<?php echo $welcome_view_image['alt']; ?>" />
+    <?php $front_page_id = get_option( 'page_on_front' ); ?>
+    <?php $welcome_view_image = get_field('welcome_view_image', $front_page_id); ?>
+    <img src="<?php echo $welcome_view_image['url']; ?>" alt="<?php echo $welcome_view_image['alt']; ?>" />
 
     </div>
 
+    <?php endif; ?>
+
+    <!-- front page only -->
+
+    <?php if (is_front_page()): ?>
+
+        <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_1'); ?>
+
+    <?php endif; ?>
+
     <div id="luxy" class="z-30">
 
-        <div id="page" class="min-h-screen flex flex-col">
+        <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity">
+            
+            <!-- front page only -->
+
+            <?php if (is_front_page()): ?>
+
+            <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_2'); ?>
+
+            <?php endif; ?>
 
             <div id="content" class="site-content pt-40 flex-grow">
 

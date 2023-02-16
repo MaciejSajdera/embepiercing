@@ -45,6 +45,10 @@ function embepiercing_enqueue_scripts() {
 	if (is_front_page()) {
 		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), $theme->get( 'Version' ) );
 	}
+
+	if (is_post_type_archive('faq')) {
+		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), $theme->get( 'Version' ) );
+	}
 }
 
 add_action( 'wp_enqueue_scripts', 'embepiercing_enqueue_scripts' );

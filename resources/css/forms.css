@@ -1,6 +1,10 @@
 #contactForm {
-  max-width: 1024px;
+
   margin: auto;
+}
+
+.home-page-template #contactForm {
+  max-width: 1024px;
 }
 
 #contactForm * {

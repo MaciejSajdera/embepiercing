@@ -1,14 +1,19 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<header class="entry-header mb-4">
-		<?php the_title( sprintf( '<h1 class="entry-title text-2xl lg:text-5xl font-extrabold leading-tight mb-1"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
-		<time datetime="<?php echo get_the_date( 'c' ); ?>" itemprop="datePublished" class="text-sm text-gray-700"><?php echo get_the_date(); ?></time>
-	</header>
+<?php echo get_template_part('/template-parts/partials/page-header'); ?>
 
 	<div class="entry-content">
-		<?php the_content(); ?>
 
 		<?php
+
+			/* translators: %s: Name of current post */
+			the_content(
+				sprintf(
+					__( 'Continue reading %s', 'embepiercing' ),
+					the_title( '<span class="screen-reader-text">"', '"</span>', false )
+				)
+			);
+
 			wp_link_pages(
 				array(
 					'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'embepiercing' ) . '</span>',

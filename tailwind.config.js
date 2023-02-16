@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   // mode: "jit",
-  content: ["./**/*.php", "./*.php", "*.php"],
+  content: ["./**/*.php", "./**/**/*.php", "./*.php", "*.php", "./js/app.js"],
   presets: [],
   darkMode: "media", // or 'class'
   theme: {
@@ -963,5 +963,5 @@ module.exports = {
     "active",
     "disabled",
   ],
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("flowbite/plugin")],
 };
