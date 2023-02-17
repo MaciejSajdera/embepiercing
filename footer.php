@@ -7,13 +7,18 @@
 <?php do_action( 'embepiercing_content_after' ); ?>
 
 
-<footer id="colophon" class="site-footer bg-black py-20" role="contentinfo">
+<footer id="colophon" class="site-footer bg-black pt-20 pb-12" role="contentinfo">
 
     <?php do_action( 'embepiercing_footer' ); ?>
 
-    <div class="container mx-auto text-center text-gold prose">
+    <div class="container mx-auto text-center text-gold prose mb-6">
         &copy; <?php echo date_i18n( 'Y' );?> - <?php echo get_bloginfo( 'name' );?>
     </div>
+
+    <div class="container mx-auto text-center text-white prose">
+       <a href="<?php echo get_privacy_policy_url(); ?>">polityka prywatności</a>
+    </div>
+
 </footer>
 
 </div> <!-- end of Luxy wrapper -->

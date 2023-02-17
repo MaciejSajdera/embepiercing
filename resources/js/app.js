@@ -2,8 +2,12 @@ import menu from "./collapseMenu.js";
 import ProgressScrollBar from "./scrollProgress.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";
+// import { onCLS, onFID, onLCP } from "web-vitals";
 
-// Navigation toggle
+// onCLS(console.log);
+// onFID(console.log);
+// onLCP(console.log);
+
 window.addEventListener("load", function () {
   /* show page content with transition */
 
@@ -25,13 +29,14 @@ window.addEventListener("load", function () {
 
   /* general cookies */
 
-  const modalElementCookiesGeneral = document.querySelector("#modalEl");
+  const modalElementCookiesGeneral = document.querySelector(
+    "#modalGeneralCookies"
+  );
 
   const modalOptionsCookiesGeneral = {
-    placement: "bottom-right",
+    placement: "bottom-left",
     backdrop: "dynamic",
-    backdropClasses:
-      "bg-gray-900 bg-opacity-50 backdrop-blur-lg fixed inset-0 z-40",
+    backdropClasses: "bg-gray-900 bg-opacity-50 fixed inset-0 z-40",
     closable: false,
     onHide: () => {
       console.log("modal is hidden");
@@ -70,28 +75,33 @@ window.addEventListener("load", function () {
     },
   };
 
-  function handleCookiesAdultery() {
-    if (modalElementAdultery) {
-      const modalCookiesAdultery = new Modal(
-        modalElementAdultery,
-        modalOptionsAdultery
-      );
-
-      handleCookiesAccept(
-        modalElementAdultery,
-        modalCookiesAdultery,
-        "adult_user_cookie_consent"
-      );
-    }
-    return;
+  function handleGeneralCookies() {
+    handleCookiesAccept(
+      modalElementCookiesGeneral,
+      modalCookiesGeneral,
+      "user_cookie_consent"
+    );
   }
 
-  /* handle general cookies and THEN other optional cookie handlers */
-  handleCookiesAccept(
-    modalElementCookiesGeneral,
-    modalCookiesGeneral,
-    "user_cookie_consent",
-    handleCookiesAdultery,
-    handleCookiesAdultery
-  );
+  function handleCookiesAdultery() {
+    const modalCookiesAdultery = new Modal(
+      modalElementAdultery,
+      modalOptionsAdultery
+    );
+
+    handleCookiesAccept(
+      modalElementAdultery,
+      modalCookiesAdultery,
+      "adult_user_cookie_consent",
+      handleGeneralCookies
+    );
+  }
+
+  if (!modalElementAdultery) {
+    handleGeneralCookies();
+  }
+
+  if (modalElementAdultery) {
+    handleCookiesAdultery();
+  }
 });

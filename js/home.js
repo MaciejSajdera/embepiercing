@@ -1,1 +1,68 @@
-function a(){let o=document.querySelector("#heroScreenMarker"),e=document.querySelector("#heroImageHolder"),t={root:null,rootMargin:"0px"},s=(n,r)=>{n.forEach(i=>{i.isIntersecting&&(e.classList.add("fadeIn"),e.classList.remove("fadeOut")),i.isIntersecting||(e.classList.remove("fadeIn"),e.classList.add("fadeOut"))})};o&&new IntersectionObserver(s,t).observe(o)}function c(){let o=document.querySelectorAll(".zoom-in-out"),e={root:null,rootMargin:"100px"},t=(s,n)=>{s.forEach(r=>{r.isIntersecting&&(r.target.classList.add("zoomOut"),r.target.classList.remove("zoomIn")),r.isIntersecting||(r.target.classList.remove("zoomOut"),r.target.classList.add("zoomIn"))})};o&&o.forEach(s=>{new IntersectionObserver(t,e).observe(s)})}function l(){let o=document.querySelectorAll(".title-reveal");!o||o.forEach((e,t)=>{e.classList.add("title-reveal--revealed"),t>0&&(e.style.transitionDelay=`${t*.15}s`)})}window.addEventListener("load",function(){a(),c(),l()});
+// resources/js/observers.js
+function createObserverHeroImage() {
+  const heroScreenMarker = document.querySelector("#heroScreenMarker");
+  const heroElement = document.querySelector("#heroImageHolder");
+  let options = {
+    root: null,
+    rootMargin: "0px"
+  };
+  const fadeBgImage = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        heroElement.classList.add("fadeIn");
+        heroElement.classList.remove("fadeOut");
+      }
+      if (!entry.isIntersecting) {
+        heroElement.classList.remove("fadeIn");
+        heroElement.classList.add("fadeOut");
+      }
+    });
+  };
+  if (heroScreenMarker) {
+    const io = new IntersectionObserver(fadeBgImage, options);
+    io.observe(heroScreenMarker);
+  }
+}
+function createObserverZoomInOutImgs() {
+  const heroScreenMarkers = document.querySelectorAll(".zoom-in-out");
+  let options = {
+    root: null,
+    rootMargin: "100px"
+  };
+  const zoomInImg = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("zoomOut");
+        entry.target.classList.remove("zoomIn");
+      }
+      if (!entry.isIntersecting) {
+        entry.target.classList.remove("zoomOut");
+        entry.target.classList.add("zoomIn");
+      }
+    });
+  };
+  if (heroScreenMarkers) {
+    heroScreenMarkers.forEach((marker) => {
+      const io = new IntersectionObserver(zoomInImg, options);
+      io.observe(marker);
+    });
+  }
+}
+
+// resources/js/home.js
+function revealTitle() {
+  const titlesToBeRevealed = document.querySelectorAll(".title-reveal");
+  if (!titlesToBeRevealed)
+    return;
+  titlesToBeRevealed.forEach((title, i) => {
+    title.classList.add("title-reveal--revealed");
+    if (i > 0) {
+      title.style.transitionDelay = `${i * 0.15}s`;
+    }
+  });
+}
+window.addEventListener("load", function() {
+  createObserverHeroImage();
+  createObserverZoomInOutImgs();
+  revealTitle();
+});

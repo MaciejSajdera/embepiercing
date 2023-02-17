@@ -27,8 +27,8 @@
 
         <div id="social-media__mobile-menu" class="flex flex-col">
             <div class="socials flex flex-col flex-wrap content-start mb-16">
-                <a href="" class="ig mb-4" target="_blank"></a>
-                <a href="" class="fb" target="_blank"></a>
+            <a href="https://www.instagram.com/embe_piercing/" class="ig mb-4" target="_blank"></a>
+            <a href="https://www.facebook.com/embepiercing" class="fb" target="_blank"></a>
             </div>
         </div>
     </div>

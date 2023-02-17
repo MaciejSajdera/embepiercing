@@ -45,9 +45,13 @@ export function handleCookiesAccept(
 ) {
   let cookie_consent = getCookie(cookieName);
 
-  //   console.log("cookie_consent: ", cookieName);
+  if (cookie_consent === "" && cookieName === "user_cookie_consent") {
+    setTimeout(() => {
+      modalObject.show();
+    }, 2500);
+  }
 
-  if (cookie_consent === "") {
+  if (cookie_consent === "" && cookieName === "adult_user_cookie_consent") {
     modalObject.show();
   }
 
@@ -59,6 +63,18 @@ export function handleCookiesAccept(
   }
 
   modalNode.addEventListener("click", (e) => {
+    if (
+      e.target.id === "reject" &&
+      cookieName === "adult_user_cookie_consent"
+    ) {
+      return;
+    }
+
+    if (e.target.id === "reject") {
+      modalObject.hide();
+      return;
+    }
+
     if (e.target.id === "accept") {
       acceptCookieConsent(cookieName, 0.04);
 

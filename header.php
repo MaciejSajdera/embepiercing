@@ -16,9 +16,8 @@
 
     <?php $adultery = get_field('adultery', get_the_ID() ); ?>
 
-    <?php if ($adultery === true) : ?>
+    <?php if ($adultery === true && is_single() ) : ?>
     <?php echo get_template_part('/template-parts/partials/modal-cookies-adultery'); ?>
-    <?php echo get_template_part('/template-parts/partials/modal-cookies-adultery2'); ?>
     <?php endif; ?>
 
     <?php echo get_template_part('/template-parts/partials/modal-cookies-general'); ?>
@@ -39,7 +38,7 @@
         </div>
     </header>
 
-    <div id="heroImageHolder" class="embebg fadeOut">
+    <div id="heroImageHolder" class="embebg fadeOut -z-10">
 
     <?php $front_page_id = get_option( 'page_on_front' ); ?>
     <?php $welcome_view_image = get_field('welcome_view_image', $front_page_id); ?>
@@ -59,12 +58,12 @@
 
     <div id="luxy" class="z-30">
 
-        <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity">
+        <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-300">
             
             <!-- front page only -->
 
             <?php if (is_front_page()): ?>
-
+            <?php get_template_part( 'template-parts/layout/menu-mobile'); ?>
             <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_2'); ?>
 
             <?php endif; ?>

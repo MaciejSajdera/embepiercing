@@ -3,7 +3,7 @@ a {
 }
 
 section {
-  @apply mx-auto max-w-7xl p-4;
+  @apply mx-auto max-w-7xl;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

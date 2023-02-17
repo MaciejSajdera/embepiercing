@@ -264,6 +264,10 @@
   top: 4rem;
   background: black;
   transition: none;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  /* box-shadow: 0 12px 15px 5px rgba(224, 197, 110, 0.3),
+    0 12px 6px 0 rgba(224, 197, 110, 0.1); */
 }
 
 .desktop-menu ul li {

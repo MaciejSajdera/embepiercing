@@ -143,7 +143,7 @@ var Modal = /** @class */ (function () {
   Modal.prototype.show = function () {
     if (this.isHidden) {
       this._targetEl.classList.add("flex");
-      this._targetEl.classList.remove("hidden");
+      this._targetEl.classList.remove("modal-hidden");
       this._targetEl.setAttribute("aria-modal", "true");
       this._targetEl.setAttribute("role", "dialog");
       this._targetEl.removeAttribute("aria-hidden");
@@ -161,7 +161,7 @@ var Modal = /** @class */ (function () {
   };
   Modal.prototype.hide = function () {
     if (this.isVisible) {
-      this._targetEl.classList.add("hidden");
+      this._targetEl.classList.add("modal-hidden");
       this._targetEl.classList.remove("flex");
       this._targetEl.setAttribute("aria-hidden", "true");
       this._targetEl.removeAttribute("aria-modal");
@@ -207,14 +207,16 @@ export function initModals() {
     .querySelectorAll("[data-modal-target]")
     .forEach(function ($triggerEl) {
       var modalId = $triggerEl.getAttribute("data-modal-target");
-      var $modalEl = document.getElementById(modalId);
-      if ($modalEl) {
-        var placement = $modalEl.getAttribute("data-modal-placement");
-        var backdrop = $modalEl.getAttribute("data-modal-backdrop");
+      var $modalGeneralCookies = document.getElementById(modalId);
+      if ($modalGeneralCookies) {
+        var placement = $modalGeneralCookies.getAttribute(
+          "data-modal-placement"
+        );
+        var backdrop = $modalGeneralCookies.getAttribute("data-modal-backdrop");
         if (!getModalInstance(modalId, modalInstances)) {
           modalInstances.push({
             id: modalId,
-            object: new Modal($modalEl, {
+            object: new Modal($modalGeneralCookies, {
               placement: placement ? placement : Default.placement,
               backdrop: backdrop ? backdrop : Default.backdrop,
             }),
@@ -234,15 +236,17 @@ export function initModals() {
     .querySelectorAll("[data-modal-toggle]")
     .forEach(function ($triggerEl) {
       var modalId = $triggerEl.getAttribute("data-modal-toggle");
-      var $modalEl = document.getElementById(modalId);
-      if ($modalEl) {
-        var placement = $modalEl.getAttribute("data-modal-placement");
-        var backdrop = $modalEl.getAttribute("data-modal-backdrop");
+      var $modalGeneralCookies = document.getElementById(modalId);
+      if ($modalGeneralCookies) {
+        var placement = $modalGeneralCookies.getAttribute(
+          "data-modal-placement"
+        );
+        var backdrop = $modalGeneralCookies.getAttribute("data-modal-backdrop");
         var modal_1 = getModalInstance(modalId, modalInstances);
         if (!modal_1) {
           modal_1 = {
             id: modalId,
-            object: new Modal($modalEl, {
+            object: new Modal($modalGeneralCookies, {
               placement: placement ? placement : Default.placement,
               backdrop: backdrop ? backdrop : Default.backdrop,
             }),
@@ -264,8 +268,8 @@ export function initModals() {
   // show modal on click if exists based on id
   document.querySelectorAll("[data-modal-show]").forEach(function ($triggerEl) {
     var modalId = $triggerEl.getAttribute("data-modal-show");
-    var $modalEl = document.getElementById(modalId);
-    if ($modalEl) {
+    var $modalGeneralCookies = document.getElementById(modalId);
+    if ($modalGeneralCookies) {
       var modal_2 = getModalInstance(modalId, modalInstances);
       if (modal_2) {
         $triggerEl.addEventListener("click", function () {
@@ -293,8 +297,8 @@ export function initModals() {
   // hide modal on click if exists based on id
   document.querySelectorAll("[data-modal-hide]").forEach(function ($triggerEl) {
     var modalId = $triggerEl.getAttribute("data-modal-hide");
-    var $modalEl = document.getElementById(modalId);
-    if ($modalEl) {
+    var $modalGeneralCookies = document.getElementById(modalId);
+    if ($modalGeneralCookies) {
       var modal_3 = getModalInstance(modalId, modalInstances);
       if (modal_3) {
         $triggerEl.addEventListener("click", function () {
