@@ -14,7 +14,6 @@
 
     <?php echo get_template_part('/template-parts/partials/post-type-header'); ?>
 
-    
     <?php if ( have_posts() ) : ?>
         <div class="reveal-from__trigger grid grid-cols-1 md:grid-cols-3 gap-16 items-center content-center justify-center">
         
