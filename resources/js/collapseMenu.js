@@ -11,6 +11,10 @@ export default function menu() {
   let lastScrollTop = 0;
 
   function collapseSection(element) {
+    // mark the section as "currently collapsed"
+    element.setAttribute("data-collapsed", "true");
+    element.classList.remove("sub-menu--expanded");
+
     // get the height of the element's inner content, regardless of its actual size
     const sectionHeight = element.scrollHeight;
 
@@ -31,9 +35,6 @@ export default function menu() {
         element.style.height = 0 + "px";
       });
     });
-
-    // mark the section as "currently collapsed"
-    element.setAttribute("data-collapsed", "true");
   }
 
   function expandSection(element) {
@@ -52,6 +53,7 @@ export default function menu() {
 
     // mark the section as "currently not collapsed"
     element.setAttribute("data-collapsed", "false");
+    element.classList.add("sub-menu--expanded");
   }
 
   function expandSubMenu(e) {
@@ -63,9 +65,17 @@ export default function menu() {
 
     if (isCollapsed) {
       expandSection(submenu);
-      submenu.setAttribute("data-collapsed", "false");
-      submenu.classList.add("sub-menu--expanded");
     } else {
+      collapseSection(submenu);
+    }
+
+    console.log(!e.target.closest(".sub-menu"));
+
+    if (
+      isCollapsed &&
+      !e.target.matches(".show-submenu") &&
+      !e.target.closest(".sub-menu")
+    ) {
       collapseSection(submenu);
     }
   }
@@ -73,13 +83,25 @@ export default function menu() {
   const mobileMenu = () => {
     const mainContent = document.querySelector("#content");
     const mobileMenuToggle = document.querySelector("#mobileMenuToggle");
+    let menuToggled = false;
 
     if (!mobileMenuToggle) return;
 
-    mobileMenuToggle.addEventListener("click", function (e) {
-      e.preventDefault();
-      mobileMenuWrapper.classList.toggle("toggled");
-      mainContent.classList.toggle("overlay--active");
+    document.addEventListener("click", function (e) {
+      if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
+        mobileMenuWrapper.classList.toggle("toggled");
+        mainContent.classList.toggle("overlay--active");
+        menuToggled = false;
+      }
+
+      if (
+        e.target.matches("#mobileMenuToggle") ||
+        e.target.closest("#mobileMenuToggle")
+      ) {
+        mobileMenuWrapper.classList.toggle("toggled");
+        mainContent.classList.toggle("overlay--active");
+        menuToggled = true;
+      }
     });
 
     const nav = document.querySelector(".mobile-menu");
@@ -95,7 +117,7 @@ export default function menu() {
       }
     });
 
-    nav.addEventListener("click", function (e) {
+    document.addEventListener("click", function (e) {
       if (e.target.classList.contains("show-submenu")) {
         expandSubMenu(e);
       }
@@ -114,6 +136,8 @@ export default function menu() {
 
   const desktopMenuHome = () => {
     const nav = document.querySelector(".desktop-menu--home");
+    const allSubmenus = document.querySelectorAll(".sub-menu");
+    let isMenuCollapsed = false;
 
     if (!nav) return;
 
@@ -122,36 +146,91 @@ export default function menu() {
     linksWithChildren.forEach((link) => {
       if (link.querySelector(".sub-menu")) {
         const submenu = link.querySelector(".sub-menu");
-
         submenu.setAttribute("data-collapsed", "true");
       }
     });
 
-    nav.addEventListener("click", function (e) {
+    document.addEventListener("click", function (e) {
       if (e.target.classList.contains("show-submenu")) {
-        expandSubMenu(e);
+        const expandSubMenuTrigger = e.target;
+        const submenu = expandSubMenuTrigger.nextElementSibling;
+        const isCollapsed = submenu.getAttribute("data-collapsed") === "true";
+        expandSubMenuTrigger.classList.toggle("show-submenu__toggled");
+
+        if (isCollapsed) {
+          expandSection(submenu);
+          isMenuCollapsed = true;
+        } else {
+          collapseSection(submenu);
+          isMenuCollapsed = false;
+        }
+      }
+
+      if (
+        isMenuCollapsed &&
+        !e.target.matches(".show-submenu") &&
+        !e.target.closest(".sub-menu")
+      ) {
+        allSubmenus.forEach((submenu) => {
+          collapseSection(submenu);
+        });
+
+        nav.querySelectorAll(".show-submenu").forEach((el) => {
+          el.classList.remove("show-submenu__toggled");
+        });
+
+        isMenuCollapsed = false;
       }
     });
   };
 
   const desktopMenuGlobal = () => {
     const nav = document.querySelector(".desktop-menu--global");
+    const allSubmenus = document.querySelectorAll(".sub-menu");
+    let isMenuCollapsed = false;
 
     if (!nav) return;
 
     const linksWithChildren = nav.querySelectorAll(".menu-item-has-children");
 
+    /* set data attr here because wp doesnt allow to do it on an initial render */
     linksWithChildren.forEach((link) => {
       if (link.querySelector(".sub-menu")) {
         const submenu = link.querySelector(".sub-menu");
-
         submenu.setAttribute("data-collapsed", "true");
       }
     });
 
-    nav.addEventListener("click", function (e) {
+    document.addEventListener("click", function (e) {
       if (e.target.classList.contains("show-submenu")) {
-        expandSubMenu(e);
+        const expandSubMenuTrigger = e.target;
+        const submenu = expandSubMenuTrigger.nextElementSibling;
+        const isCollapsed = submenu.getAttribute("data-collapsed") === "true";
+        expandSubMenuTrigger.classList.toggle("show-submenu__toggled");
+
+        if (isCollapsed) {
+          expandSection(submenu);
+          isMenuCollapsed = true;
+        } else {
+          collapseSection(submenu);
+          isMenuCollapsed = false;
+        }
+      }
+
+      if (
+        isMenuCollapsed &&
+        !e.target.matches(".show-submenu") &&
+        !e.target.closest(".sub-menu")
+      ) {
+        allSubmenus.forEach((submenu) => {
+          collapseSection(submenu);
+        });
+
+        nav.querySelectorAll(".show-submenu").forEach((el) => {
+          el.classList.remove("show-submenu__toggled");
+        });
+
+        isMenuCollapsed = false;
       }
     });
   };

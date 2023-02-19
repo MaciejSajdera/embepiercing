@@ -200,7 +200,7 @@ function prefix_add_button_after_menu_item_children(
 		$item_output = str_replace(
 			$args->link_after . "</a>",
 			$args->link_after .
-				'</a><span class="show-submenu" aria-expanded="false" aria-pressed="false"></span>',
+				'</a><span class="show-submenu" role="button" tabindex="0" aria-label="show-submenu" aria-expanded="false" aria-pressed="false"></span>',
 			$item_output
 		);
 	}

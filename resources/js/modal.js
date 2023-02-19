@@ -1,3 +1,5 @@
+/* Modal code from flowbite lib */
+
 var __assign =
   (this && this.__assign) ||
   function () {

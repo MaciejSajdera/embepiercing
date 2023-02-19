@@ -7,16 +7,17 @@
 
         <div class="pb-40 mt-40">
 
-            <div class="menu-wrapper hidden md:flex md:flex-col md:gap-4">
+            <!-- backdrop-blur-sm bg-black bg-opacity-10  -->
+            <div class="menu-wrapper py-4 rounded-2xl hidden md:flex md:flex-col md:gap-4">
 
                 <?php
 				wp_nav_menu(
 					array(
 						'container_id'    => 'primary-menu',
-						'container_class' => 'hidden mt-4 p-4 lg:mt-0 lg:p-0 lg:block',
-						'menu_class'      => 'lg:flex lg:-mx-4 flex-col',
+						'container_class' => 'hidden mt-4 p-4 lg:mt-0 lg:p-0 md:block',
+						'menu_class'      => 'md:flex md:-mx-4 flex-col',
 						'theme_location'  => 'primary',
-						'li_class'        => 'flex flex-wrap content-between items-center lg:mx-4 uppercase text-md font-bold',
+						'li_class'        => 'flex flex-wrap content-between items-center md:mx-4 uppercase text-md font-bold',
 						'fallback_cb'     => false,
 
 					)
@@ -24,7 +25,7 @@
 				?>
 
                 <div class="">
-                    <p class="text-gray-400 prose-gold">
+                    <p class="text-gray-400">
                         <?php echo header_copyright() ?>
                     </p>
                 </div>
@@ -32,8 +33,8 @@
         </div>
 
         <div class="socials  content-start mb-16 hidden md:flex md:flex-col md:flex-wrap">
-            <a href="https://www.instagram.com/embe_piercing/" class="ig mb-4" target="_blank"></a>
-            <a href="https://www.facebook.com/embepiercing" class="fb" target="_blank"></a>
+            <a aria-label="link to instagram" href="https://www.instagram.com/embe_piercing/" class="ig mb-4" target="_blank"></a>
+            <a aria-label="link to facebook" href="https://www.facebook.com/embepiercing" class="fb" target="_blank"></a>
         </div>
 
     </div>

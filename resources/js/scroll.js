@@ -1,3 +1,6 @@
+import { isElementInterSecting } from "./observers.js";
+import RevealChildrenOf from "./revealNodes.js";
+
 export default class ProgressScrollBar {
   constructor(element) {
     this.element = element;
@@ -12,4 +15,15 @@ export default class ProgressScrollBar {
       progressIndicator.style.height = progressIndicatorHeight + "%";
     };
   }
+}
+
+export function scrollAnimations() {
+  const allRevealChildrenOfTrigger = document.querySelectorAll(
+    ".reveal-from__trigger"
+  );
+
+  allRevealChildrenOfTrigger &&
+    allRevealChildrenOfTrigger.forEach((element) => {
+      new RevealChildrenOf(element, 10);
+    });
 }

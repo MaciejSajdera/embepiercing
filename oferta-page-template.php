@@ -1,7 +1,11 @@
+<?php
+ /* Template Name: Oferta Page Template */ 
+?>
+
 <?php get_header(); ?>
 
 	<div class="container my-8 mx-auto">
-		
+
 	<?php echo get_template_part('/template-parts/partials/page-header'); ?>
 
 	<?php if ( have_posts() ) : ?>
@@ -11,7 +15,7 @@
 			the_post();
 			?>
 
-			<?php get_template_part( 'template-parts/content', 'blog-post' ); ?>
+			<?php get_template_part( 'template-parts/content', 'single' ); ?>
 
 			<?php
 			// If comments are open or we have at least one comment, load up the comment template.

@@ -107,6 +107,8 @@ function menu() {
   const desktopMenuHomeNavigation = document.querySelector(".desktop-menu") || document.querySelector(".desktop-menu--home");
   let lastScrollTop = 0;
   function collapseSection(element) {
+    element.setAttribute("data-collapsed", "true");
+    element.classList.remove("sub-menu--expanded");
     const sectionHeight = element.scrollHeight;
     const elementTransition = element.style.transition;
     element.style.transition = "";
@@ -117,7 +119,6 @@ function menu() {
         element.style.height = 0 + "px";
       });
     });
-    element.setAttribute("data-collapsed", "true");
   }
   function expandSection(element) {
     const sectionHeight = element.scrollHeight;
@@ -127,6 +128,7 @@ function menu() {
     };
     addSelfDestructingEventListener(element, "transitionend", removeHeight);
     element.setAttribute("data-collapsed", "false");
+    element.classList.add("sub-menu--expanded");
   }
   function expandSubMenu(e) {
     const expandSubMenuTrigger = e.target;
@@ -135,21 +137,31 @@ function menu() {
     const isCollapsed = submenu.getAttribute("data-collapsed") === "true";
     if (isCollapsed) {
       expandSection(submenu);
-      submenu.setAttribute("data-collapsed", "false");
-      submenu.classList.add("sub-menu--expanded");
     } else {
+      collapseSection(submenu);
+    }
+    console.log(!e.target.closest(".sub-menu"));
+    if (isCollapsed && !e.target.matches(".show-submenu") && !e.target.closest(".sub-menu")) {
       collapseSection(submenu);
     }
   }
   const mobileMenu = () => {
     const mainContent = document.querySelector("#content");
     const mobileMenuToggle = document.querySelector("#mobileMenuToggle");
+    let menuToggled = false;
     if (!mobileMenuToggle)
       return;
-    mobileMenuToggle.addEventListener("click", function(e) {
-      e.preventDefault();
-      mobileMenuWrapper.classList.toggle("toggled");
-      mainContent.classList.toggle("overlay--active");
+    document.addEventListener("click", function(e) {
+      if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
+        mobileMenuWrapper.classList.toggle("toggled");
+        mainContent.classList.toggle("overlay--active");
+        menuToggled = false;
+      }
+      if (e.target.matches("#mobileMenuToggle") || e.target.closest("#mobileMenuToggle")) {
+        mobileMenuWrapper.classList.toggle("toggled");
+        mainContent.classList.toggle("overlay--active");
+        menuToggled = true;
+      }
     });
     const nav = document.querySelector(".mobile-menu");
     if (!nav)
@@ -161,7 +173,7 @@ function menu() {
         submenu.setAttribute("data-collapsed", "true");
       }
     });
-    nav.addEventListener("click", function(e) {
+    document.addEventListener("click", function(e) {
       if (e.target.classList.contains("show-submenu")) {
         expandSubMenu(e);
       }
@@ -177,6 +189,8 @@ function menu() {
   handleMobileChange(mediaQueryMobile);
   const desktopMenuHome = () => {
     const nav = document.querySelector(".desktop-menu--home");
+    const allSubmenus = document.querySelectorAll(".sub-menu");
+    let isMenuCollapsed = false;
     if (!nav)
       return;
     const linksWithChildren = nav.querySelectorAll(".menu-item-has-children");
@@ -186,14 +200,35 @@ function menu() {
         submenu.setAttribute("data-collapsed", "true");
       }
     });
-    nav.addEventListener("click", function(e) {
+    document.addEventListener("click", function(e) {
       if (e.target.classList.contains("show-submenu")) {
-        expandSubMenu(e);
+        const expandSubMenuTrigger = e.target;
+        const submenu = expandSubMenuTrigger.nextElementSibling;
+        const isCollapsed = submenu.getAttribute("data-collapsed") === "true";
+        expandSubMenuTrigger.classList.toggle("show-submenu__toggled");
+        if (isCollapsed) {
+          expandSection(submenu);
+          isMenuCollapsed = true;
+        } else {
+          collapseSection(submenu);
+          isMenuCollapsed = false;
+        }
+      }
+      if (isMenuCollapsed && !e.target.matches(".show-submenu") && !e.target.closest(".sub-menu")) {
+        allSubmenus.forEach((submenu) => {
+          collapseSection(submenu);
+        });
+        nav.querySelectorAll(".show-submenu").forEach((el) => {
+          el.classList.remove("show-submenu__toggled");
+        });
+        isMenuCollapsed = false;
       }
     });
   };
   const desktopMenuGlobal = () => {
     const nav = document.querySelector(".desktop-menu--global");
+    const allSubmenus = document.querySelectorAll(".sub-menu");
+    let isMenuCollapsed = false;
     if (!nav)
       return;
     const linksWithChildren = nav.querySelectorAll(".menu-item-has-children");
@@ -203,9 +238,28 @@ function menu() {
         submenu.setAttribute("data-collapsed", "true");
       }
     });
-    nav.addEventListener("click", function(e) {
+    document.addEventListener("click", function(e) {
       if (e.target.classList.contains("show-submenu")) {
-        expandSubMenu(e);
+        const expandSubMenuTrigger = e.target;
+        const submenu = expandSubMenuTrigger.nextElementSibling;
+        const isCollapsed = submenu.getAttribute("data-collapsed") === "true";
+        expandSubMenuTrigger.classList.toggle("show-submenu__toggled");
+        if (isCollapsed) {
+          expandSection(submenu);
+          isMenuCollapsed = true;
+        } else {
+          collapseSection(submenu);
+          isMenuCollapsed = false;
+        }
+      }
+      if (isMenuCollapsed && !e.target.matches(".show-submenu") && !e.target.closest(".sub-menu")) {
+        allSubmenus.forEach((submenu) => {
+          collapseSection(submenu);
+        });
+        nav.querySelectorAll(".show-submenu").forEach((el) => {
+          el.classList.remove("show-submenu__toggled");
+        });
+        isMenuCollapsed = false;
       }
     });
   };
@@ -230,7 +284,48 @@ function menu() {
   handleDesktopChange(mediaQueryDesktop);
 }
 
-// resources/js/scrollProgress.js
+// resources/js/observers.js
+var isElementInViewport = (el) => {
+  const scroll = window.scrollY || window.pageYOffset;
+  const boundsTop = el.getBoundingClientRect().top + scroll;
+  const viewport = {
+    top: scroll,
+    bottom: scroll + window.innerHeight
+  };
+  const bounds = {
+    top: boundsTop,
+    bottom: boundsTop + el.clientHeight
+  };
+  return bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom || bounds.top <= viewport.bottom && bounds.top >= viewport.top;
+};
+
+// resources/js/revealNodes.js
+var RevealChildrenOf = class {
+  constructor(elementsParent, delayTime) {
+    this.elementsParent = elementsParent;
+    this.delayTime = delayTime;
+    if (!elementsParent) {
+      return;
+    }
+    this.hide();
+    isElementInViewport(this.elementsParent) ? this.reveal() : document.addEventListener("scroll", () => {
+      this.reveal();
+    });
+  }
+  hide() {
+    this.elementsParent.children ? [...this.elementsParent.children].map((element, i) => {
+      element.style.opacity = "0";
+    }) : "";
+  }
+  reveal() {
+    isElementInViewport(this.elementsParent) && this.elementsParent.children ? [...this.elementsParent.children].map((element, i) => {
+      element.style.transitionDelay = `${i / this.delayTime}s`;
+      element.style.opacity = "1";
+    }) : "";
+  }
+};
+
+// resources/js/scroll.js
 var ProgressScrollBar = class {
   constructor(element) {
     this.element = element;
@@ -244,6 +339,12 @@ var ProgressScrollBar = class {
     };
   }
 };
+function scrollAnimations() {
+  const allRevealChildrenOfTrigger = document.querySelectorAll(".reveal-from__trigger");
+  allRevealChildrenOfTrigger && allRevealChildrenOfTrigger.forEach((element) => {
+    new RevealChildrenOf(element, 10);
+  });
+}
 
 // resources/js/modal.js
 var __assign = function() {
@@ -492,6 +593,7 @@ window.addEventListener("load", function() {
   menu();
   const progress = new ProgressScrollBar(document.querySelector("#progressBar"));
   progress.init();
+  scrollAnimations();
   const modalElementCookiesGeneral = document.querySelector("#modalGeneralCookies");
   const modalOptionsCookiesGeneral = {
     placement: "bottom-left",

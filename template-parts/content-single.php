@@ -1,7 +1,5 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-<?php echo get_template_part('/template-parts/partials/page-header'); ?>
-
 	<div class="entry-content">
 
 		<?php

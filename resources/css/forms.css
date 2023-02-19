@@ -53,7 +53,7 @@ textarea {
 #contactForm .frm_button_submit {
   background: transparent !important;
   padding: 2.5rem 25%;
-  border: 2px solid white;
+  border: 4px solid white;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
 }

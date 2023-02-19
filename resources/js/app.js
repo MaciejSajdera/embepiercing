@@ -1,8 +1,9 @@
 import menu from "./collapseMenu.js";
-import ProgressScrollBar from "./scrollProgress.js";
+import ProgressScrollBar from "./scroll.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";
-// import { onCLS, onFID, onLCP } from "web-vitals";
+// import { onCLS, onFID, onLCP } from "web-vitals"
+import { scrollAnimations } from "./scroll.js";
 
 // onCLS(console.log);
 // onFID(console.log);
@@ -26,6 +27,10 @@ window.addEventListener("load", function () {
     document.querySelector("#progressBar")
   );
   progress.init();
+
+  /* scroll animations */
+
+  scrollAnimations();
 
   /* general cookies */
 

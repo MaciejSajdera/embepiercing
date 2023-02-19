@@ -1,0 +1,89 @@
+.reveal-node {
+  opacity: 0;
+  transition: all 0.5s ease-in;
+}
+
+.revealed .reveal-from--left {
+  animation: revealFromLeft 1s ease forwards;
+}
+
+.revealed .reveal-from--right {
+  animation: revealFromRight 1s ease forwards;
+}
+
+.revealed .reveal-from--bottom {
+  animation: revealFromBottom 1s ease forwards;
+}
+
+.revealed .reveal-from--transparent {
+  animation: revealFromTransparent 1s ease forwards;
+}
+
+.revealed .reveal-from--right {
+  animation: revealFromRight 1s ease forwards;
+}
+
+@keyframes revealFromLeft {
+  0% {
+    transform: translate(-25%, 0%);
+    opacity: 0;
+  }
+
+  90% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes revealFromRight {
+  0% {
+    transform: translate(25%, 0%);
+    opacity: 0;
+  }
+
+  90% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes revealFromBottom {
+  0% {
+    transform: translate(0%, 25%);
+    opacity: 0;
+  }
+
+  90% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes revealFromTransparent {
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

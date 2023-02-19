@@ -1,6 +1,6 @@
 <div class="mobile-menu md:hidden">
 
-    <button id="mobileMenuToggle" class="menu-toggle nav-icon z-50" aria-controls="primary-menu" aria-expanded="false">
+    <button id="mobileMenuToggle" class="menu-toggle nav-icon z-50" aria-controls="primary-menu-mobile" aria-expanded="false">
                 <div class="nav-icon-wrapper">
                     <div class="burger-menu-piece top-0"></div>
                     <div class="burger-menu-piece top-[7px]"></div>
@@ -18,7 +18,7 @@
             "theme_location" => "primary",
             "container" => "nav",
             'container_class' => 'mb-16',
-            "menu_id" => "primary-menu",
+            "menu_id" => "primary-menu-mobile",
             'menu_class'      => 'flex flex-col',
             'li_class'        => 'flex flex-wrap uppercase text-md font-bold',
             "orderby" => "menu_order",
@@ -27,8 +27,8 @@
 
         <div id="social-media__mobile-menu" class="flex flex-col">
             <div class="socials flex flex-col flex-wrap content-start mb-16">
-            <a href="https://www.instagram.com/embe_piercing/" class="ig mb-4" target="_blank"></a>
-            <a href="https://www.facebook.com/embepiercing" class="fb" target="_blank"></a>
+            <a aria-label="link to instagram" href="https://www.instagram.com/embe_piercing/" class="ig mb-4" target="_blank"></a>
+            <a aria-label="link to facebook" href="https://www.facebook.com/embepiercing" class="fb" target="_blank"></a>
             </div>
         </div>
     </div>

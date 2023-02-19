@@ -11,12 +11,13 @@
 
     <?php do_action( 'embepiercing_footer' ); ?>
 
-    <div class="container mx-auto text-center text-gold prose mb-6">
-        &copy; <?php echo date_i18n( 'Y' );?> - <?php echo get_bloginfo( 'name' );?>
+    <div class="container mx-auto text-center text-white prose mb-16">
+
+        <a href="<?php echo get_privacy_policy_url(); ?>">polityka prywatności</a>
     </div>
 
-    <div class="container mx-auto text-center text-white prose">
-       <a href="<?php echo get_privacy_policy_url(); ?>">polityka prywatności</a>
+    <div class="container mx-auto text-center  text-gold prose">
+        &copy; <?php echo date_i18n( 'Y' );?> - <?php echo get_bloginfo( 'name' );?>
     </div>
 
 </footer>

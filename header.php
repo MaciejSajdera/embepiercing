@@ -56,7 +56,7 @@
 
     <?php endif; ?>
 
-    <div id="luxy" class="z-30">
+    <div id="luxy" class="z-30 will-change-transform">
 
         <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-300">
             
@@ -68,7 +68,7 @@
 
             <?php endif; ?>
 
-            <div id="content" class="site-content pt-40 flex-grow">
+            <div id="content" class="site-content pt-20 md:pt-40 flex-grow">
 
                 <?php do_action( 'embepiercing_content_start' ); ?>
 
