@@ -1,4 +1,4 @@
-import menu from "./collapseMenu.js";
+import menu from "./menu.js";
 import ProgressScrollBar from "./scroll.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";

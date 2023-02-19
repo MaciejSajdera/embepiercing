@@ -69,8 +69,6 @@ export default function menu() {
       collapseSection(submenu);
     }
 
-    console.log(!e.target.closest(".sub-menu"));
-
     if (
       isCollapsed &&
       !e.target.matches(".show-submenu") &&
@@ -88,20 +86,24 @@ export default function menu() {
     if (!mobileMenuToggle) return;
 
     document.addEventListener("click", function (e) {
-      if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
-        mobileMenuWrapper.classList.toggle("toggled");
-        mainContent.classList.toggle("overlay--active");
-        menuToggled = false;
-      }
-
       if (
         e.target.matches("#mobileMenuToggle") ||
         e.target.closest("#mobileMenuToggle")
       ) {
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
-        menuToggled = true;
+        menuToggled = !menuToggled;
+        return;
       }
+
+      if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
+        mobileMenuWrapper.classList.toggle("toggled");
+        mainContent.classList.toggle("overlay--active");
+        menuToggled = !menuToggled;
+        return;
+      }
+
+      console.log(e.target);
     });
 
     const nav = document.querySelector(".mobile-menu");

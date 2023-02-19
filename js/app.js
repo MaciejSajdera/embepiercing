@@ -99,7 +99,7 @@ var addSelfDestructingEventListener = (element, eventType, callback) => {
   element.addEventListener(eventType, handler);
 };
 
-// resources/js/collapseMenu.js
+// resources/js/menu.js
 var import_luxy = __toModule(require_luxy_min());
 function menu() {
   const mediaQueryMobile = window.matchMedia("(max-width: 992px)");
@@ -140,7 +140,6 @@ function menu() {
     } else {
       collapseSection(submenu);
     }
-    console.log(!e.target.closest(".sub-menu"));
     if (isCollapsed && !e.target.matches(".show-submenu") && !e.target.closest(".sub-menu")) {
       collapseSection(submenu);
     }
@@ -152,16 +151,19 @@ function menu() {
     if (!mobileMenuToggle)
       return;
     document.addEventListener("click", function(e) {
-      if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
-        mobileMenuWrapper.classList.toggle("toggled");
-        mainContent.classList.toggle("overlay--active");
-        menuToggled = false;
-      }
       if (e.target.matches("#mobileMenuToggle") || e.target.closest("#mobileMenuToggle")) {
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
-        menuToggled = true;
+        menuToggled = !menuToggled;
+        return;
       }
+      if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
+        mobileMenuWrapper.classList.toggle("toggled");
+        mainContent.classList.toggle("overlay--active");
+        menuToggled = !menuToggled;
+        return;
+      }
+      console.log(e.target);
     });
     const nav = document.querySelector(".mobile-menu");
     if (!nav)
