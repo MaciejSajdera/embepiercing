@@ -2,7 +2,7 @@
 
 	<div class="container my-8 mx-auto">
 
-	<?php echo get_template_part('/template-parts/partials/page-header'); ?>
+	<?php echo get_template_part('/template-parts/partials/post-type-header'); ?>
 
 	<?php if ( have_posts() ) : ?>
 

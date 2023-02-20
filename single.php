@@ -2,7 +2,7 @@
 
 	<div class="container my-8 mx-auto">
 		
-	<?php echo get_template_part('/template-parts/partials/page-header'); ?>
+	<?php echo get_template_part('/template-parts/partials/post-type-header'); ?>
 
 	<?php if ( have_posts() ) : ?>
 
@@ -15,9 +15,9 @@
 
 			<?php
 			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+			// if ( comments_open() || get_comments_number() ) :
+			// 	comments_template();
+			// endif;
 			?>
 
 		<?php endwhile; ?>
