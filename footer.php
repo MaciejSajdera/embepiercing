@@ -16,9 +16,14 @@
         <a href="<?php echo get_privacy_policy_url(); ?>">polityka prywatności</a>
     </div>
 
-    <div class="container mx-auto text-center  text-gold prose">
+    <div class="container mx-auto text-center text-gold prose mb-4">
         &copy; <?php echo date_i18n( 'Y' );?> - <?php echo get_bloginfo( 'name' );?>
     </div>
+    <div class="container mx-auto text-center  text-gold prose">
+        wszelkie prawa zastrzeżone
+    </div>
+
+
 
 </footer>
 

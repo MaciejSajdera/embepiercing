@@ -11,15 +11,15 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('mb--4'); ?>>
 
-    <div class="entry-content blog-post__container flex flex-col md:flex-row-reverse items-start">
+    <div class="entry-content blog-post__container flex flex-col md:block items-start mb-16">
 
-        <div class="post-thumbnail w-full flex md:w-2/3 md:float-right md:pl-8 md:pb-8">
+        <div class="post-thumbnail w-full md:w-2/3 md:float-right md:pl-8 md:pb-8">
 
-            <img class="" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', TRUE); ?>" />
+            <img class="w-full h-[512px] object-cover overflow-hidden rounded-lg" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', TRUE); ?>" />
 
         </div>
 
-        <div class="post-content flex-auto">
+        <div class="post-content inline w-full md:w-1/3 text-lg">
 
             <?php
 			/* translators: %s: Name of current post */
@@ -45,7 +45,7 @@
         </div> <!-- .post-content -->
     </div><!-- .entry-content -->
 
-	<div class="post-navigation">
+	<div class="post-navigation flex justify-between items-center">
 
         <div>
             <?php previous_post_link('%link', '<span class="post-navigation__prev">Poprzedni</span> <p>%title</p>'); ?>

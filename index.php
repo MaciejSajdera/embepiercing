@@ -2,7 +2,7 @@
 
 <div class="container mx-auto my-8">
 
-  <?php echo get_template_part('/template-parts/partials/page-header'); ?>
+  <?php echo get_template_part('/template-parts/partials/archive-header'); ?>
 
     <?php if ( have_posts() ) : ?>
 

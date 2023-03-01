@@ -3,8 +3,8 @@ import luxy from "luxy.js";
 
 // Setup
 export default function menu() {
-  const mediaQueryMobile = window.matchMedia("(max-width: 992px)");
-  const mediaQueryDesktop = window.matchMedia("(min-width: 992px)");
+  const mediaQueryMobile = window.matchMedia("(max-width: 1280px)");
+  const mediaQueryDesktop = window.matchMedia("(min-width: 1280px)");
   const desktopMenuHomeNavigation =
     document.querySelector(".desktop-menu") ||
     document.querySelector(".desktop-menu--home");

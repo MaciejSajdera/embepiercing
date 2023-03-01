@@ -54,6 +54,13 @@
 
         <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_1'); ?>
 
+        <header class="fixed w-full z-40">
+            <div class="mx-auto container flex">
+                <?php do_action( 'embepiercing_header' ); ?>
+                <?php get_template_part( 'template-parts/layout/menu-mobile'); ?>
+            </div>
+        </header>
+
     <?php endif; ?>
 
     <div id="luxy" class="z-30 will-change-transform">
@@ -63,7 +70,7 @@
             <!-- front page only -->
 
             <?php if (is_front_page()): ?>
-            <?php get_template_part( 'template-parts/layout/menu-mobile'); ?>
+
             <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_2'); ?>
 
             <?php endif; ?>
