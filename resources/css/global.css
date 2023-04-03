@@ -22,6 +22,10 @@ a {
   @apply ml-4 list-disc;
 }
 
+.entry-content ol {
+  @apply ml-4 list-decimal;
+}
+
 svg,
 path {
   pointer-events: none;
@@ -40,7 +44,7 @@ a:hover {
   opacity: 1;
 }
 
-#content:before {
+/* #content:before {
   transition: all 0.5s ease-in-out;
   content: "";
   position: fixed;
@@ -52,7 +56,7 @@ a:hover {
   z-index: 1;
   opacity: 0;
   pointer-events: none;
-}
+} */
 
 #content.overlay--active:before {
   opacity: 1;

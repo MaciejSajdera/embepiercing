@@ -1,3 +1,4 @@
+import { gtag } from "ga-gtag";
 // Create cookie
 export function setCookie(cname, cvalue, exdays) {
   const d = new Date();
@@ -34,6 +35,14 @@ export function getCookie(cname) {
 // Set cookie consent
 export function acceptCookieConsent(cookieName, duration) {
   deleteCookie(cookieName);
+
+  if (cookieName === "user_cookie_consent") {
+    gtag("consent", "update", {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+    });
+  }
+
   setCookie(cookieName, 1, duration);
 }
 
@@ -44,6 +53,13 @@ export function handleCookiesAccept(
   ...rest
 ) {
   let cookie_consent = getCookie(cookieName);
+
+  if (cookie_consent === "1" && cookieName === "user_cookie_consent") {
+    gtag("consent", "update", {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+    });
+  }
 
   if (cookie_consent === "" && cookieName === "user_cookie_consent") {
     setTimeout(() => {

@@ -38,8 +38,3 @@
         </div>
 
     </div>
-
-    <div id="heroImageHolder" class="embebg -z-10">
-        <?php $welcome_view_image = get_field('welcome_view_image'); ?>
-        <img src=<?php echo $welcome_view_image['url']; ?> alt="<?php echo $welcome_view_image['alt']; ?>" />
-    </div>

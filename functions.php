@@ -38,20 +38,25 @@ add_action( 'after_setup_theme', 'embepiercing_setup' );
 function embepiercing_enqueue_scripts() {
 	$theme = wp_get_theme();
 
-	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), $theme->get( 'Version' ) );
-	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), $theme->get( 'Version' ) );
-	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), '1.12' );
+	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), '1.12' );
+	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), '1.12' );
 
 	if (is_front_page()) {
-		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), $theme->get( 'Version' ) );
+		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), '1.12' );
 	}
 
 	if (is_post_type_archive('faq')) {
-		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), $theme->get( 'Version' ) );
+		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), '1.12' );
 	}
 }
 
 add_action( 'wp_enqueue_scripts', 'embepiercing_enqueue_scripts' );
+
+add_theme_support('category-thumbnails');
+
+add_theme_support( 'post-thumbnails' );
+
 
 /**
  * Get asset path.
@@ -67,6 +72,23 @@ function embepiercing_asset( $path ) {
 
 	return add_query_arg( 'time', time(),  get_stylesheet_directory_uri() . '/' . $path );
 }
+
+function my_login_logo_one() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	$image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+?>
+<style type="text/css">
+body.login div#login h1 a {
+    background-image: url(<?php echo $image[0]; ?>);
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    padding-bottom: 30px;
+}
+</style>
+<?php
+}
+add_action( 'login_enqueue_scripts', 'my_login_logo_one' );
 
 
 /* UTILITIES */
@@ -271,6 +293,8 @@ class Has_Child_Walker_Nav_Menu extends Walker_Nav_Menu
 		);
 	}
 }
+
+//YOAST
 
 function set_custom_facebook_image_size( $img_size ) { return 'large' ; };
 add_filter( 'wpseo_opengraph_image_size' , 'set_custom_facebook_image_size' );

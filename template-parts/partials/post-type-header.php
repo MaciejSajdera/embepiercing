@@ -4,7 +4,7 @@ $title = get_the_title();
 
 ?>
 
-<div class="mb-8 hidden xl:block text-gold">
+<div class="mb-16 text-gold">
         <?php
             if ( function_exists('yoast_breadcrumb') ) {
                 yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );

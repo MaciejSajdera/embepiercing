@@ -90,6 +90,7 @@ export default function menu() {
         e.target.matches("#mobileMenuToggle") ||
         e.target.closest("#mobileMenuToggle")
       ) {
+        mobileMenuToggle.classList.toggle("active");
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
         menuToggled = !menuToggled;
@@ -97,6 +98,7 @@ export default function menu() {
       }
 
       if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
+        mobileMenuToggle.classList.toggle("active");
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
         menuToggled = !menuToggled;

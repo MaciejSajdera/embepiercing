@@ -4,7 +4,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="p-6 space-y-6">
                 <p class="text-base prose leading-relaxed text-gray-500 dark:text-gray-400">
-                Ta strona wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania poszczególnych jej funkcji (pliki cookies własne) oraz pliki cookies pochodzące od podmiotów trzecich w celu korzystania z narzędzi zewnętrznych (Google Analytics, HotJar, YouTube, Spreaker, MailerLite). Do informacji, które są gromadzone w plikach cookies od podmiotów trzecich, mają dostęp dostawcy wymienionych narzędzi zewnętrznych. Dowiedz się więcej: <a class="text-gold" href="<?php echo get_privacy_policy_url(); ?>">polityka prywatności</a>.
+                Ta strona wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania poszczególnych jej funkcji (pliki cookies własne) oraz pliki cookies pochodzące od podmiotów trzecich w celu korzystania z narzędzi zewnętrznych (Google Analytics). Do informacji, które są gromadzone w plikach cookies od podmiotów trzecich, mają dostęp dostawcy wymienionych narzędzi zewnętrznych. Dowiedz się więcej: <a class="text-gold" href="<?php echo get_privacy_policy_url(); ?>">polityka prywatności</a>.
                 </p>
                 <p class="text-base prose leading-relaxed text-gray-500 dark:text-gray-400">
                 Czy wyrażasz zgodę na przechowywanie informacji oraz uzyskiwanie dostępu do informacji przechowywanych w plikach cookies?

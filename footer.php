@@ -7,7 +7,7 @@
 <?php do_action( 'embepiercing_content_after' ); ?>
 
 
-<footer id="colophon" class="site-footer bg-black pt-20 pb-12" role="contentinfo">
+<footer id="colophon" class="site-footer bg-black bg-opacity-50 pt-20 pb-12" role="contentinfo">
 
     <?php do_action( 'embepiercing_footer' ); ?>
 

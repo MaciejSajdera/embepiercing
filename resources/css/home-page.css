@@ -42,7 +42,12 @@ header h1.title-reveal--revealed {
 }
 
 #heroImageHolder.fadeOut {
-  opacity: 0.25;
+  opacity: 0.35;
+}
+
+.single-post #heroImageHolder.fadeOut,
+.single-szkolenia #heroImageHolder.fadeOut {
+  opacity: 0.15;
 }
 
 #heroImageHolder img {

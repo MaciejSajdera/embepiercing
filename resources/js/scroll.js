@@ -1,4 +1,3 @@
-import { isElementInterSecting } from "./observers.js";
 import RevealChildrenOf from "./revealNodes.js";
 
 export default class ProgressScrollBar {

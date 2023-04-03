@@ -16,12 +16,9 @@
         <?php echo get_template_part('/template-parts/portfolio-grid'); ?>
     </section>
 
-    <section class="mb-64">
-        <h3 class="text-6xl mb-24 text-center uppercase">Najnowsze posty</h3>
-        <div class="reveal-from__trigger grid grid-cols-1 md:grid-cols-3 gap-16 items-center content-center justify-center">
-            <?php echo get_template_part('template-parts/recent-posts') ?>
-        </div>
-    </section>
+
+    <?php echo get_template_part('template-parts/recent-posts') ?>
+
 
     <section class="mb-64">
         <h3 class="text-6xl mb-24 text-center uppercase">Zapisz się na wizytę</h3>

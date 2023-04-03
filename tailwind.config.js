@@ -1,7 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // mode: "jit",
-  content: ["./**/*.php", "./**/**/*.php", "./*.php", "*.php", "./js/app.js"],
+  mode: "jit",
+  content: [
+    "./**/*.php",
+    "./**/**/*.php",
+    "./**/**/**/*.php",
+    "./*.php",
+    "*.php",
+    "./js/app.js",
+  ],
   presets: [],
   darkMode: "media", // or 'class'
   theme: {

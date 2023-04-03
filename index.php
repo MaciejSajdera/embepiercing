@@ -6,18 +6,19 @@
 
     <?php if ( have_posts() ) : ?>
 
-      <div class="reveal-from__trigger grid grid-cols-1 md:grid-cols-3 gap-16 items-center content-center justify-center">
+      <ul class="reveal-from__trigger grid grid-cols-1 md:grid-cols-2 gap-16 items-center content-center justify-center list-none">
 
         <?php
         while ( have_posts() ) :
           the_post();
           ?>
-        
-        <?php echo get_template_part( 'template-parts/partials/blog-post-tile'); ?>
+        <li class="reveal-node reveal justify-self-stretch h-full w-full">
+          <?php echo get_template_part( 'template-parts/partials/blog-post-tile'); ?>
+        </li>
 
         <?php endwhile; ?>
 
-    </div>
+      </ul>
 
     <?php endif; ?>
 

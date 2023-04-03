@@ -2,12 +2,10 @@ import menu from "./menu.js";
 import ProgressScrollBar from "./scroll.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";
-// import { onCLS, onFID, onLCP } from "web-vitals"
-import { scrollAnimations } from "./scroll.js";
+// import { onCLS, onFID, onLCP } from "web-vitals";
+import { gtag, install } from "ga-gtag";
 
-// onCLS(console.log);
-// onFID(console.log);
-// onLCP(console.log);
+import { scrollAnimations } from "./scroll.js";
 
 window.addEventListener("load", function () {
   /* show page content with transition */
@@ -27,6 +25,18 @@ window.addEventListener("load", function () {
     document.querySelector("#progressBar")
   );
   progress.init();
+
+  /* Vitals */
+  // onCLS("onCLS", console.log);
+  // onFID("onFID", console.log);
+  // onLCP("onLCP", console.log);
+
+  /* GA */
+  install("UA-130569087-3", { send_page_view: false });
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    analytics_storage: "denied",
+  });
 
   /* scroll animations */
 
