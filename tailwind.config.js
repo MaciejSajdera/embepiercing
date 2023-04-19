@@ -55,6 +55,7 @@ module.exports = {
         css: {
           color: theme("colors.white"),
         },
+
       },
     }),
     columns: {

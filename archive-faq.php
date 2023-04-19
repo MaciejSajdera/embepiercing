@@ -1,10 +1,4 @@
 <?php
-
-/*
- * Template Name: Galerie Archive Template
- * description: >-
-  Page template without sidebar
- */
 global $wp_query;
 $my_posts = $wp_query->posts;
  ?>

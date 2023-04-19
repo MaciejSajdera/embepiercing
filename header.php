@@ -35,11 +35,9 @@
 
     <div id="progressBar"></div>
 
-    <!-- all pages  -->
-
     <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_1'); ?>
 
-    <header class="fixed w-full z-40">
+    <header id="fixedMenuMobile" class="fixed w-full z-40">
         <div class="mx-auto container flex">
 
             <?php do_action( 'embepiercing_header' ); ?>
@@ -48,20 +46,18 @@
         </div>
     </header>
 
-
-
     <div id="heroImageHolder" class="embebg fadeOut -z-10">
 
-    <?php $front_page_id = get_option( 'page_on_front' ); ?>
-    <?php $welcome_view_image = get_field('welcome_view_image', $front_page_id); ?>
-    <img src="<?php echo $welcome_view_image['url']; ?>" alt="<?php echo $welcome_view_image['alt']; ?>" />
+        <?php $front_page_id = get_option( 'page_on_front' ); ?>
+        <?php $welcome_view_image = get_field('welcome_view_image', $front_page_id); ?>
+        <img src="<?php echo $welcome_view_image['url']; ?>" alt="<?php echo $welcome_view_image['alt']; ?>" />
 
     </div>
 
 
     <div id="luxy" class="z-30 will-change-transform">
 
-        <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-300">
+        <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-100 will-change-transform">
             
             <!-- front page only -->
 
@@ -70,6 +66,8 @@
             <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_2'); ?>
 
             <?php endif; ?>
+
+            <!-- / front page only -->
 
             <div id="content" class="site-content pt-12 md:pt-20 flex-grow">
 

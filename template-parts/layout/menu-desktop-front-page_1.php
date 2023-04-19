@@ -24,7 +24,7 @@
 				);
 				?>
 
-                <div class="">
+                <div class="flex w-fit">
                     <p class="text-gray-400">
                         <?php echo header_copyright() ?>
                     </p>

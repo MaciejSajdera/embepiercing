@@ -1,13 +1,3 @@
-<?php
-
-/*
- * Template Name: Galerie Archive Template
- * description: >-
-  Page template without sidebar
- */
-
- ?>
-
 <?php get_header(); ?>
 
 <div class="container my-8 mx-auto">
@@ -23,11 +13,15 @@
         /* Taxonomy title*/
 
         ?>
-        <h2 class="text-2xl mb-4">
+        <h2 class="text-2xl text-gold mb-4">
             <?php echo $term_single->name; ?>
         </h2>
         <?php
-        
+
+        if ( $term_single->name !== 'Konsultacje' ) {
+            echo '<p class="mb-4">Cena zawiera tytanową biżuterię w kolorze srebrnym. W ofercie mamy możliwość założenia kolorowej tytanowej biżuterii, kolor uzyskany jest poprzez proces anodyzacji. Koszt anodyzacji to 30 zł za jeden kolczyk.</p>';
+        }
+
         $args = array(  
             'post_type' => 'uslugi',
             'post_status' => 'publish',
@@ -58,7 +52,7 @@
                         Nazwa
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Cena (PLN)
+                        Cena
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Czytaj więcej
@@ -86,9 +80,20 @@
                     ?>
                 </td>
                 <td class="w-48 px-6 py-4">
-                    <a href="<?php echo get_permalink() ?>">
-                    <button type="button" id="accept" class="text-white text-sm md:text-lg bg-gold hover:bg-blend-darken focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-4 py-2 text-center">Szczegóły</button>
-                    </a>
+                    <?php
+                    $content = get_the_content();
+                    if (strlen($content) > 0) {
+                        ?>
+                        <a href="<?php echo get_permalink() ?>">
+                        <button type="button" class="text-white text-sm md:text-lg bg-gold hover:bg-blend-darken focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-4 py-2 text-center">Szczegóły</button>
+                        </a>
+                        <?php
+                    } else {
+                        ?>
+                        <button disabled type="button" class="text-white text-sm md:text-lg bg-gray-500 hover:bg-blend-darken focus:ring-4 focus:outline-none font-medium rounded-lg px-4 py-2 text-center">Szczegóły</button>
+                        <?php
+                    }
+                    ?>
                 </td>
             </tr>
 
@@ -100,13 +105,14 @@
 
         ?>
             </table>
+
         </div>
 
         <?php
     }
 
     ?>
-    
+
 
 
 

@@ -1,18 +1,15 @@
 import { gtag } from "ga-gtag";
 // Create cookie
-export function setCookie(cname, cvalue, exdays) {
+export function setCookie(cname, cvalue) {
   const d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  d.setTime(d.getTime() + 7 * 24 * 60 * 60 * 1000);
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 // Delete cookie
 export function deleteCookie(cname) {
-  const d = new Date();
-  d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=;" + expires + ";path=/";
+  document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
 // Read cookie
@@ -37,13 +34,13 @@ export function acceptCookieConsent(cookieName, duration) {
   deleteCookie(cookieName);
 
   if (cookieName === "user_cookie_consent") {
-    gtag("consent", "update", {
+    gtag("consent", "grant", {
       ad_storage: "granted",
       analytics_storage: "granted",
     });
   }
 
-  setCookie(cookieName, 1, duration);
+  setCookie(cookieName, 1);
 }
 
 export function handleCookiesAccept(
@@ -92,10 +89,9 @@ export function handleCookiesAccept(
     }
 
     if (e.target.id === "accept") {
-      acceptCookieConsent(cookieName, 0.04);
+      acceptCookieConsent(cookieName);
 
       const isHiddenPromise = new Promise((resolve, reject) => {
-        console.log("resolved");
         resolve(modalObject.hide());
       });
 

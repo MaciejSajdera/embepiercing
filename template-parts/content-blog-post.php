@@ -27,15 +27,16 @@
 
         <div class="post-thumbnail w-full mb-8 md:mb-0 md:w-1/2 md:float-right md:pl-8 md:pb-8">
 
+			<?php if (strlen(get_the_post_thumbnail_url()) > 0) : ?>
             <img class="w-full h-[512px] object-cover overflow-hidden rounded-lg" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', TRUE); ?>" />
-
+			<?php endif; ?>
         </div>
 
         <div class="post-content inline w-full md:w-1/3 text-lg">
 
-		<div class="hidden md:block mb-8">
-			<?php echo get_template_part('/template-parts/partials/blog-post-header'); ?>
-		</div>
+			<div class="hidden md:block mb-8">
+				<?php echo get_template_part('/template-parts/partials/blog-post-header'); ?>
+			</div>
 
             <?php
 			/* translators: %s: Name of current post */
@@ -59,12 +60,12 @@
 		?>
 
 		
-		<div class="flex flex-col content-center items-center mt-16 mb-16">
-        	<p class="mb--1">Udostępnij:</p>
-        <?php echo do_shortcode('[Sassy_Social_Share]'); ?>
+			<div class="flex flex-col content-center items-center mt-16 mb-16">
+				<p class="mb--1">Udostępnij:</p>
+			<?php echo do_shortcode('[Sassy_Social_Share]'); ?>
 
-        </div> <!-- .post-content -->
-    </div>
+			</div> <!-- .post-content -->
+   	 	</div>
 
 
     </div><!-- .entry-content -->

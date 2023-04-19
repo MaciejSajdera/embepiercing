@@ -26,6 +26,18 @@ a {
   @apply ml-4 list-decimal;
 }
 
+.entry-content h1 {
+  @apply text-3xl;
+}
+
+.entry-content h2 {
+  @apply text-2xl;
+}
+
+.entry-content h3 {
+  @apply text-xl;
+}
+
 svg,
 path {
   pointer-events: none;
@@ -74,4 +86,21 @@ a:hover {
     z-index: 100;
     transition: width 0.75s linear;
   }
+}
+
+.page-template-contact-page-template .entry-title {
+  @apply text-6xl;
+}
+
+.entry-content--revealed .trimmed-content {
+  display: none;
+}
+
+.entry-content--revealed .full-content {
+  display: block;
+}
+
+.grecaptcha-badge {
+  width: 0px !important;
+  position: absolute !important;
 }

@@ -1,5 +1,5 @@
 <?php if ( have_posts() ) : ?>
-        <div class="reveal-from__trigger grid grid-cols-1 md:grid-cols-3 gap-16 items-center content-center justify-center">
+        <div class="reveal-from__trigger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 md:gap-16 items-center content-center justify-center">
         
             <?php
             $args = array(  

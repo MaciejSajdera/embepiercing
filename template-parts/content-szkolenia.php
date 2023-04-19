@@ -20,9 +20,9 @@ $price = get_field('price');
     <div class="entry-content blog-post__container flex flex-col md:block items-start mb-16">
 
         <div class="post-thumbnail w-full mb-16 md:mb-0 md:w-2/3 md:float-right md:pl-8 md:pb-8">
-
+			<?php if (strlen(get_the_post_thumbnail_url()) > 0) : ?>
             <img class="w-full h-[512px] object-cover overflow-hidden rounded-lg" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', TRUE); ?>" />
-
+			<?php endif; ?>
         </div>
 
         <div class="post-content inline w-full md:w-1/3 text-lg">
