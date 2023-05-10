@@ -55,7 +55,6 @@ module.exports = {
         css: {
           color: theme("colors.white"),
         },
-
       },
     }),
     columns: {
@@ -267,8 +266,8 @@ module.exports = {
         DEFAULT: "1rem",
         sm: "2rem",
         lg: "4rem",
-        xl: "9rem",
-        "2xl": "12rem",
+        xl: "14rem",
+        "2xl": "16rem",
       },
     },
     content: {

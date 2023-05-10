@@ -17,7 +17,7 @@ function revealTitle() {
 }
 
 // Navigation toggle
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   createObserverHeroImage();
   createObserverZoomInOutImgs();
   revealTitle();

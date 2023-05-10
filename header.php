@@ -35,10 +35,18 @@
 
     <div id="progressBar"></div>
 
+    <!-- desktop menu -->
+
+
+
     <?php echo get_template_part('/template-parts/layout/menu-desktop-front-page_1'); ?>
 
+
+
+    <!-- / desktop menu -->
+
     <header id="fixedMenuMobile" class="fixed w-full z-40">
-        <div class="mx-auto container flex">
+        <div class="container mx-auto flex">
 
             <?php do_action( 'embepiercing_header' ); ?>
             <?php get_template_part( 'template-parts/layout/menu-mobile'); ?>
@@ -57,7 +65,7 @@
 
     <div id="luxy" class="z-30 will-change-transform">
 
-        <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-100 will-change-transform">
+        <div id="page" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-[500ms] will-change-transform">
             
             <!-- front page only -->
 

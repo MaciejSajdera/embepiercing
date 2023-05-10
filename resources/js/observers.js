@@ -10,14 +10,14 @@ export default function createObserverHeroImage() {
 
   const fadeBgImage = (entries, observer) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        heroElement.classList.add("fadeIn");
-        heroElement.classList.remove("fadeOut");
+      if (entry.isIntersecting || isElementInViewport(heroElement)) {
+        heroElement.classList?.add("fadeIn");
+        heroElement.classList?.remove("fadeOut");
       }
 
       if (!entry.isIntersecting) {
-        heroElement.classList.remove("fadeIn");
-        heroElement.classList.add("fadeOut");
+        heroElement.classList?.remove("fadeIn");
+        heroElement.classList?.add("fadeOut");
       }
     });
   };

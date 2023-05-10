@@ -1,6 +1,6 @@
 <div class="mobile-menu xl:hidden">
 
-    <button id="mobileMenuToggle" class="menu-toggle nav-icon top-[0.5rem] right-4 z-50" aria-controls="primary-menu-mobile" aria-expanded="false">
+    <button id="mobileMenuToggle" class="menu-toggle nav-icon top-[0.5rem] right-4 z-50" aria-label="primary-menu-mobile" aria-controls="primary-menu-mobile" aria-expanded="false">
                 <div class="nav-icon-wrapper pointer-events-none">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 200 200">

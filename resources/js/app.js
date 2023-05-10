@@ -3,17 +3,21 @@ import ProgressScrollBar from "./scroll.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";
 // import { onCLS, onFID, onLCP } from "web-vitals";
-import { gtag, install } from "ga-gtag";
+import { install } from "ga-gtag";
 
 import { scrollAnimations } from "./scroll.js";
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   /* show page content with transition */
 
   const pageContent = document.querySelector("#page");
+  const fixedMenuDesktop = document.querySelector("#fixedMenuDesktop");
 
   pageContent.classList.remove("opacity-0");
   pageContent.classList.add("opacity-100");
+
+  fixedMenuDesktop.classList.remove("opacity-0");
+  fixedMenuDesktop.classList.add("opacity-100");
 
   /* menu */
 
@@ -33,10 +37,10 @@ window.addEventListener("load", function () {
 
   /* GA */
   install("UA-130569087-3", { send_page_view: false });
-  gtag("consent", "default", {
-    ad_storage: "denied",
-    analytics_storage: "denied",
-  });
+  // gtag("consent", "default", {
+  //   ad_storage: "denied",
+  //   analytics_storage: "denied",
+  // });
 
   /* scroll animations */
 

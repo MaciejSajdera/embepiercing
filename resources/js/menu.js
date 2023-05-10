@@ -132,6 +132,7 @@ export default function menu() {
     if (e.matches) {
       console.log("Media Query Mobile Matched!");
       mobileMenu();
+      luxy.wrapperSpeed = 0;
     }
   }
 
@@ -245,7 +246,6 @@ export default function menu() {
       console.log("Media Query Desktop Matched!");
       desktopMenuHome();
       desktopMenuGlobal();
-      luxy.init();
     }
 
     window.addEventListener(

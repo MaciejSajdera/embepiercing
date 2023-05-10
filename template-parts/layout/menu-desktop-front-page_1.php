@@ -3,9 +3,9 @@
                 <?php the_custom_logo(); ?>
     </div>
 
-    <div id="fixedMenuDesktop" class="desktop-menu--home fixed z-40 left-8 h-full flex flex-col justify-between">
+    <div id="fixedMenuDesktop" class="desktop-menu--home fixed z-40 left-8 h-full flex flex-col justify-between opacity-0 transition-opacity duration-[500ms] will-change-transform">
 
-        <div class="pb-40 mt-40">
+        <div class="pb-10 mt-40">
 
             <!-- backdrop-blur-sm bg-black bg-opacity-10  -->
             <div class="menu-wrapper py-4 rounded-2xl hidden xl:flex xl:flex-col xl:gap-4">

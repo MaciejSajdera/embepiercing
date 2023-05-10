@@ -13,6 +13,11 @@ a {
   transition: color 0.2s ease-in-out;
 }
 
+.current-menu-item > a,
+.current-menu-ancestor > a {
+  @apply text-gold;
+}
+
 .entry-content a,
 .post-navigation a {
   @apply text-gold;

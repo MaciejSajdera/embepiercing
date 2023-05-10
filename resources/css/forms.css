@@ -24,8 +24,7 @@
 #bookingForm input[type="email"],
 #bookingForm textarea,
 #bookingForm input[type="tel"] {
-  background: transparent;
-  background-color: transparent !important;
+  background-color: #c8c5c517 !important;
   width: 100%;
   border: none !important;
   border-bottom: 2px solid lightgray !important;

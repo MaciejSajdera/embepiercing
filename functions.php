@@ -37,16 +37,19 @@ add_action( 'after_setup_theme', 'embepiercing_setup' );
  */
 function embepiercing_enqueue_scripts() {
 
-	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), '1.47' );
-	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), '1.47' );
-	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), '1.47' );
+	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), '1.59' );
+	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), '1.59' );
 
 	if (is_front_page()) {
-		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), '1.47' );
+		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), '1.59' );
 	}
 
+	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), '1.59' );
+
+
+
 	if (is_post_type_archive('faq')) {
-		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), '1.47' );
+		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), '1.53' );
 	}
 }
 
@@ -55,6 +58,20 @@ add_action( 'wp_enqueue_scripts', 'embepiercing_enqueue_scripts' );
 add_theme_support('category-thumbnails');
 
 add_theme_support( 'post-thumbnails' );
+
+/**
+ * Defer the reCAPTCHA script until after the page loads
+ *
+ * @link https://wpforms.com/developers/how-to-defer-the-recaptcha-script/
+ */
+ 
+ function defer_recaptcha_scripts( $tag, $handle ) {
+    if ( 'google-recaptcha' === $handle ) {
+        return str_replace( ' src', ' defer="defer" src', $tag );
+    }
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'defer_recaptcha_scripts', 10, 2 );
 
 
 /**
@@ -91,6 +108,10 @@ add_action( 'login_enqueue_scripts', 'my_login_logo_one' );
 
 
 /* UTILITIES */
+
+add_filter( 'generate_google_font_display', function() {
+    return 'swap';
+} );
 
 add_filter( 'get_the_archive_title', function ($title) {
 	if ( is_category() ) {

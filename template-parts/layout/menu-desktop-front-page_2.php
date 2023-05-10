@@ -20,7 +20,11 @@
 
 <div class="absolute overflow-hidden additional-title bottom-24 md:top-16 right-6 md:right-32 text-right">
     <span id="heroScreenMarker" class="absolute -bottom-100 h-4 w-4"></span>
-    <p class="prose text-gold title-reveal">PIERCING ARTIST BASED</p>
-    <p class="prose text-gold title-reveal">IN CRACOW</p>
+
+    <div class="hidden md:block">
+        <p class="text-transparent md:text-gold title-reveal">PIERCING ARTIST BASED</p>
+        <p class="text-transparent md:text-gold title-reveal">IN CRACOW</p>
+    </div>
+
 </div>
 </header>

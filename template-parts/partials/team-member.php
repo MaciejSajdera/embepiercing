@@ -7,7 +7,7 @@ $trimmed_content = substr( $content, 0, 350 )
 <div class="wrapper flex flex-col xl:flex-row mb-32 <?php echo !$is_odd ? 'xl:flex-row-reverse' : null ?>">
 
     <div class="shrink xl:mb-0 xl:w-1/2 2xl:w-2/3 <?php echo !$is_odd ? 'xl:ml-8' : 'xl:mr-8' ?>">
-        <h3 class="text-gold prose text-5xl uppercase mb-8"><?php echo the_title() ?></h3>
+        <h4 class="text-gold prose text-5xl uppercase mb-8"><?php echo the_title() ?></h4>
 
         <div class="flex grow xl:mb-0 xl:w-1/2 2xl:w-1/3 max-h-[420px] xl:max-h-[640px] overflow-hidden mb-16 md:hidden">
             <img class="zoom-in-out object-contain object-top" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', TRUE); ?>" />
@@ -33,7 +33,15 @@ $trimmed_content = substr( $content, 0, 350 )
     </div>
 
     <div class="grow xl:mb-0 xl:w-1/2 2xl:w-1/3 max-h-[420px] xl:max-h-[640px] overflow-hidden hidden md:flex">
+        <?php
+            if (strlen(get_the_post_thumbnail_url()) > 0) :
+        ?>
         <img class="zoom-in-out object-contain object-top" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', TRUE); ?>" />
+
+        <?php 
+            endif;
+        ?>
+
     </div>
 
 </div>
