@@ -104,8 +104,6 @@ export default function menu() {
         menuToggled = !menuToggled;
         return;
       }
-
-      console.log(e.target);
     });
 
     const nav = document.querySelector(".mobile-menu");
@@ -130,7 +128,7 @@ export default function menu() {
 
   function handleMobileChange(e) {
     if (e.matches) {
-      console.log("Media Query Mobile Matched!");
+      // console.log("Media Query Mobile Matched!");
       mobileMenu();
       luxy.wrapperSpeed = 0;
     }
@@ -243,7 +241,7 @@ export default function menu() {
   function handleDesktopChange(e) {
     // Check if the media query is true
     if (e.matches) {
-      console.log("Media Query Desktop Matched!");
+      // console.log("Media Query Desktop Matched!");
       desktopMenuHome();
       desktopMenuGlobal();
     }

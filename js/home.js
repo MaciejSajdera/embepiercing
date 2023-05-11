@@ -1,1 +1,96 @@
-function i(){let t=document.querySelector("#heroScreenMarker"),e=document.querySelector("#heroImageHolder"),o={root:null,rootMargin:"0px"},r=(s,n)=>{s.forEach(a=>{(a.isIntersecting||l(e))&&(e.classList?.add("fadeIn"),e.classList?.remove("fadeOut")),a.isIntersecting||(e.classList?.remove("fadeIn"),e.classList?.add("fadeOut"))})};t&&new IntersectionObserver(r,o).observe(t)}function c(){let t=document.querySelectorAll(".zoom-in-out"),e={root:null,rootMargin:"100px"},o=(r,s)=>{r.forEach(n=>{n.isIntersecting&&(n.target.classList.add("zoomOut"),n.target.classList.remove("zoomIn")),n.isIntersecting||(n.target.classList.remove("zoomOut"),n.target.classList.add("zoomIn"))})};t&&t.forEach(r=>{new IntersectionObserver(o,e).observe(r)})}var l=t=>{let e=window.scrollY||window.pageYOffset,o=t.getBoundingClientRect().top+e,r={top:e,bottom:e+window.innerHeight},s={top:o,bottom:o+t.clientHeight};return s.bottom>=r.top&&s.bottom<=r.bottom||s.top<=r.bottom&&s.top>=r.top};function d(){let t=document.querySelectorAll(".title-reveal");!t||t.forEach((e,o)=>{e.classList.add("title-reveal--revealed"),o>0&&(e.style.transitionDelay=`${o*.15}s`)})}window.addEventListener("DOMContentLoaded",function(){i(),c(),d(),document.addEventListener("click",t=>{if(t.target.classList.contains("reveal-more")){t.preventDefault();let e=t.target.closest(".entry-content--revealFullOnMobile"),o=e.querySelector(".reveal-more");e.classList.toggle("entry-content--revealed"),o.dataset.show==="true"?(o.dataset.show="false",o.innerHTML="Czytaj wi\u0119cej"):(o.dataset.show="true",o.innerHTML="Zwi\u0144")}})});
+// resources/js/observers.js
+function createObserverHeroImage() {
+  const heroScreenMarker = document.querySelector("#heroScreenMarker");
+  const heroElement = document.querySelector("#heroImageHolder");
+  let options = {
+    root: null,
+    rootMargin: "0px"
+  };
+  const fadeBgImage = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting || isElementInViewport(heroElement)) {
+        heroElement.classList?.add("fadeIn");
+        heroElement.classList?.remove("fadeOut");
+      }
+      if (!entry.isIntersecting) {
+        heroElement.classList?.remove("fadeIn");
+        heroElement.classList?.add("fadeOut");
+      }
+    });
+  };
+  if (heroScreenMarker) {
+    const io = new IntersectionObserver(fadeBgImage, options);
+    io.observe(heroScreenMarker);
+  }
+}
+function createObserverZoomInOutImgs() {
+  const heroScreenMarkers = document.querySelectorAll(".zoom-in-out");
+  let options = {
+    root: null,
+    rootMargin: "100px"
+  };
+  const zoomInImg = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("zoomOut");
+        entry.target.classList.remove("zoomIn");
+      }
+      if (!entry.isIntersecting) {
+        entry.target.classList.remove("zoomOut");
+        entry.target.classList.add("zoomIn");
+      }
+    });
+  };
+  if (heroScreenMarkers) {
+    heroScreenMarkers.forEach((marker) => {
+      const io = new IntersectionObserver(zoomInImg, options);
+      io.observe(marker);
+    });
+  }
+}
+var isElementInViewport = (el) => {
+  const scroll = window.scrollY || window.pageYOffset;
+  const boundsTop = el.getBoundingClientRect().top + scroll;
+  const viewport = {
+    top: scroll,
+    bottom: scroll + window.innerHeight
+  };
+  const bounds = {
+    top: boundsTop,
+    bottom: boundsTop + el.clientHeight
+  };
+  return bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom || bounds.top <= viewport.bottom && bounds.top >= viewport.top;
+};
+
+// resources/js/home.js
+function revealTitle() {
+  const titlesToBeRevealed = document.querySelectorAll(".title-reveal");
+  if (!titlesToBeRevealed)
+    return;
+  titlesToBeRevealed.forEach((title, i) => {
+    title.classList.add("title-reveal--revealed");
+    if (i > 0) {
+      title.style.transitionDelay = `${i * 0.15}s`;
+    }
+  });
+}
+window.addEventListener("DOMContentLoaded", function() {
+  createObserverHeroImage();
+  createObserverZoomInOutImgs();
+  revealTitle();
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("reveal-more")) {
+      e.preventDefault();
+      const trimmedNode = e.target.closest(".entry-content--revealFullOnMobile");
+      const revealButton = trimmedNode.querySelector(".reveal-more");
+      trimmedNode.classList.toggle("entry-content--revealed");
+      if (revealButton.dataset.show === "true") {
+        revealButton.dataset.show = "false";
+        revealButton.innerHTML = "Czytaj wi\u0119cej";
+      } else {
+        revealButton.dataset.show = "true";
+        revealButton.innerHTML = "Zwi\u0144";
+      }
+    }
+  });
+});

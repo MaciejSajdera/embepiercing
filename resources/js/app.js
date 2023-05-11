@@ -2,7 +2,6 @@ import menu from "./menu.js";
 import ProgressScrollBar from "./scroll.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";
-// import { onCLS, onFID, onLCP } from "web-vitals";
 import { install } from "ga-gtag";
 
 import { scrollAnimations } from "./scroll.js";
@@ -30,11 +29,6 @@ window.addEventListener("DOMContentLoaded", function () {
   );
   progress.init();
 
-  /* Vitals */
-  // onCLS("onCLS", console.log);
-  // onFID("onFID", console.log);
-  // onLCP("onLCP", console.log);
-
   /* GA */
   install("UA-130569087-3", { send_page_view: false });
   // gtag("consent", "default", {
@@ -57,15 +51,15 @@ window.addEventListener("DOMContentLoaded", function () {
     backdrop: "dynamic",
     backdropClasses: "bg-gray-900 bg-opacity-50 fixed inset-0 z-40",
     closable: false,
-    onHide: () => {
-      console.log("modal is hidden");
-    },
-    onShow: () => {
-      console.log("modal is shown");
-    },
-    onToggle: () => {
-      console.log("modal has been toggled");
-    },
+    // onHide: () => {
+    //   console.log("modal is hidden");
+    // },
+    // onShow: () => {
+    //   console.log("modal is shown");
+    // },
+    // onToggle: () => {
+    //   console.log("modal has been toggled");
+    // },
   };
 
   const modalCookiesGeneral = new Modal(
@@ -83,15 +77,15 @@ window.addEventListener("DOMContentLoaded", function () {
     backdropClasses:
       "bg-gray-900 bg-opacity-50 backdrop-blur-3xl fixed inset-0 z-40",
     closable: false,
-    onHide: () => {
-      console.log("modal is hidden");
-    },
-    onShow: () => {
-      console.log("modal is shown");
-    },
-    onToggle: () => {
-      console.log("modal has been toggled");
-    },
+    // onHide: () => {
+    //   console.log("modal is hidden");
+    // },
+    // onShow: () => {
+    //   console.log("modal is shown");
+    // },
+    // onToggle: () => {
+    //   console.log("modal has been toggled");
+    // },
   };
 
   function handleGeneralCookies() {
@@ -123,4 +117,27 @@ window.addEventListener("DOMContentLoaded", function () {
   if (modalElementAdultery) {
     handleCookiesAdultery();
   }
+
+  /* Tag */
+
+  console.log(
+    `%c                         
+                             /                  
+                           #/                   
+                           ##                   
+                           ##                   
+                           ##                   
+   /##    ### /### /###    ## /###       /##    
+  / ###    ##/ ###/ /##  / ##/ ###  /   / ###   
+ /   ###    ##  ###/ ###/  ##   ###/   /   ###  
+##    ###   ##   ##   ##   ##    ##   ##    ### 
+########    ##   ##   ##   ##    ##   ########  
+#######     ##   ##   ##   ##    ##   #######   
+##          ##   ##   ##   ##    ##   ##        
+####    /   ##   ##   ##   ##    /#   ####    / 
+ ######/    ###  ###  ###   ####/      ######/  
+  #####      ###  ###  ###   ###        #####   
+`,
+    "font-family:monospace; color: gold;"
+  );
 });
