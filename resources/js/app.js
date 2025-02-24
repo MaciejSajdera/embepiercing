@@ -24,10 +24,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
   /* progress bar */
 
-  const progress = new ProgressScrollBar(
-    document.querySelector("#progressBar")
-  );
-  progress.init();
+  // const progress = new ProgressScrollBar(
+  //   document.querySelector("#progressBar")
+  // );
+  // progress.init();
 
   /* GA */
   install("UA-130569087-3", { send_page_view: false });

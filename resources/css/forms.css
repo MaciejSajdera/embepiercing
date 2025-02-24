@@ -34,6 +34,18 @@
   box-shadow: none !important;
   font-size: 1.25rem !important;
 }
+
+#contactForm input[type="text"]::placeholder,
+#contactForm input[type="email"]::placeholder,
+#contactForm textarea::placeholder,
+#contactForm input[type="tel"]::placeholder,
+#bookingForm input[type="text"]::placeholder,
+#bookingForm input[type="email"]::placeholder,
+#bookingForm textarea::placeholder,
+#bookingForm input[type="tel"]::placeholder {
+  font-size: inherit !important;
+}
+
 #contactForm input[type="text"],
 #contactForm input[type="email"],
 #contactForm textarea,

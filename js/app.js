@@ -358,19 +358,6 @@ var RevealChildrenOf = class {
 };
 
 // resources/js/scroll.js
-var ProgressScrollBar = class {
-  constructor(element) {
-    this.element = element;
-  }
-  init() {
-    const progressIndicator = this.element;
-    const totalHeight = document.body.scrollHeight - window.innerHeight;
-    window.onscroll = function() {
-      const progressIndicatorHeight = window.pageYOffset / totalHeight * 100;
-      progressIndicator.style.height = progressIndicatorHeight + "%";
-    };
-  }
-};
 function scrollAnimations() {
   const allRevealChildrenOfTrigger = document.querySelectorAll(".reveal-from__trigger");
   allRevealChildrenOfTrigger && allRevealChildrenOfTrigger.forEach((element) => {
@@ -636,8 +623,6 @@ window.addEventListener("DOMContentLoaded", function() {
   fixedMenuDesktop.classList.remove("opacity-0");
   fixedMenuDesktop.classList.add("opacity-100");
   menu();
-  const progress = new ProgressScrollBar(document.querySelector("#progressBar"));
-  progress.init();
   (0, import_ga_gtag2.install)("UA-130569087-3", { send_page_view: false });
   scrollAnimations();
   const modalElementCookiesGeneral = document.querySelector("#modalGeneralCookies");

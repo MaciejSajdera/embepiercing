@@ -2596,6 +2596,21 @@ header h1.title-reveal--revealed {
   font-size: 1.25rem !important;
 }
 
+#contactForm input[type="text"]::-moz-placeholder, #contactForm input[type="email"]::-moz-placeholder, #contactForm textarea::-moz-placeholder, #contactForm input[type="tel"]::-moz-placeholder, #bookingForm input[type="text"]::-moz-placeholder, #bookingForm input[type="email"]::-moz-placeholder, #bookingForm textarea::-moz-placeholder, #bookingForm input[type="tel"]::-moz-placeholder {
+  font-size: inherit !important;
+}
+
+#contactForm input[type="text"]::placeholder,
+#contactForm input[type="email"]::placeholder,
+#contactForm textarea::placeholder,
+#contactForm input[type="tel"]::placeholder,
+#bookingForm input[type="text"]::placeholder,
+#bookingForm input[type="email"]::placeholder,
+#bookingForm textarea::placeholder,
+#bookingForm input[type="tel"]::placeholder {
+  font-size: inherit !important;
+}
+
 #contactForm input[type="text"],
 #contactForm input[type="email"],
 #contactForm textarea,
