@@ -19,6 +19,6 @@ var Accordion = class {
 };
 
 // resources/js/faq.js
-window.addEventListener("load", function() {
+window.addEventListener("DOMContentLoaded", function() {
   new Accordion(document.querySelector("#accordion-color")).init();
 });

@@ -3,8 +3,8 @@ import luxy from "luxy.js";
 
 // Setup
 export default function menu() {
-  const mediaQueryMobile = window.matchMedia("(max-width: 992px)");
-  const mediaQueryDesktop = window.matchMedia("(min-width: 992px)");
+  const mediaQueryMobile = window.matchMedia("(max-width: 1280px)");
+  const mediaQueryDesktop = window.matchMedia("(min-width: 1280px)");
   const desktopMenuHomeNavigation =
     document.querySelector(".desktop-menu") ||
     document.querySelector(".desktop-menu--home");
@@ -90,6 +90,7 @@ export default function menu() {
         e.target.matches("#mobileMenuToggle") ||
         e.target.closest("#mobileMenuToggle")
       ) {
+        mobileMenuToggle.classList.toggle("active");
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
         menuToggled = !menuToggled;
@@ -97,13 +98,12 @@ export default function menu() {
       }
 
       if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
+        mobileMenuToggle.classList.toggle("active");
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
         menuToggled = !menuToggled;
         return;
       }
-
-      console.log(e.target);
     });
 
     const nav = document.querySelector(".mobile-menu");
@@ -128,8 +128,8 @@ export default function menu() {
 
   function handleMobileChange(e) {
     if (e.matches) {
-      console.log("Media Query Mobile Matched!");
       mobileMenu();
+      luxy.wrapperSpeed = 0;
     }
   }
 
@@ -240,10 +240,8 @@ export default function menu() {
   function handleDesktopChange(e) {
     // Check if the media query is true
     if (e.matches) {
-      console.log("Media Query Desktop Matched!");
       desktopMenuHome();
       desktopMenuGlobal();
-      luxy.init();
     }
 
     window.addEventListener(

@@ -1,5 +1,8 @@
 <?php
-$title = get_the_title();
+$title = get_the_archive_title();
+if ($title === "Archiwa" || $title === "Archives") {
+  $title = "Blog";
+}
 ?>
 
 <header class="entry-header mb-16">

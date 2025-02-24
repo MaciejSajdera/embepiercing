@@ -90,6 +90,37 @@ var require_luxy_min = __commonJS({
   }
 });
 
+// node_modules/ga-gtag/lib/index.js
+var require_lib = __commonJS({
+  "node_modules/ga-gtag/lib/index.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.install = exports.initDataLayer = exports.gtag = exports["default"] = void 0;
+    var initDataLayer = exports.initDataLayer = function initDataLayer2() {
+      window.dataLayer = window.dataLayer || [];
+    };
+    var install2 = exports.install = function install3(trackingId) {
+      var additionalConfigInfo = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+      var scriptId = "ga-gtag";
+      if (document.getElementById(scriptId))
+        return;
+      var _document = document, head = _document.head;
+      var script = document.createElement("script");
+      script.id = scriptId;
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=".concat(trackingId);
+      head.insertBefore(script, head.firstChild);
+      initDataLayer();
+      gtag2("js", new Date());
+      gtag2("config", trackingId, additionalConfigInfo);
+    };
+    var gtag2 = exports.gtag = function gtag3() {
+      window.dataLayer.push(arguments);
+    };
+    var _default = exports["default"] = gtag2;
+  }
+});
+
 // resources/js/utils.js
 var addSelfDestructingEventListener = (element, eventType, callback) => {
   let handler = () => {
@@ -102,8 +133,8 @@ var addSelfDestructingEventListener = (element, eventType, callback) => {
 // resources/js/menu.js
 var import_luxy = __toModule(require_luxy_min());
 function menu() {
-  const mediaQueryMobile = window.matchMedia("(max-width: 992px)");
-  const mediaQueryDesktop = window.matchMedia("(min-width: 992px)");
+  const mediaQueryMobile = window.matchMedia("(max-width: 1280px)");
+  const mediaQueryDesktop = window.matchMedia("(min-width: 1280px)");
   const desktopMenuHomeNavigation = document.querySelector(".desktop-menu") || document.querySelector(".desktop-menu--home");
   let lastScrollTop = 0;
   function collapseSection(element) {
@@ -152,18 +183,19 @@ function menu() {
       return;
     document.addEventListener("click", function(e) {
       if (e.target.matches("#mobileMenuToggle") || e.target.closest("#mobileMenuToggle")) {
+        mobileMenuToggle.classList.toggle("active");
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
         menuToggled = !menuToggled;
         return;
       }
       if (menuToggled && !e.target.closest("#mobileMenuWrapper")) {
+        mobileMenuToggle.classList.toggle("active");
         mobileMenuWrapper.classList.toggle("toggled");
         mainContent.classList.toggle("overlay--active");
         menuToggled = !menuToggled;
         return;
       }
-      console.log(e.target);
     });
     const nav = document.querySelector(".mobile-menu");
     if (!nav)
@@ -183,8 +215,8 @@ function menu() {
   };
   function handleMobileChange(e) {
     if (e.matches) {
-      console.log("Media Query Mobile Matched!");
       mobileMenu();
+      import_luxy.default.wrapperSpeed = 0;
     }
   }
   mediaQueryMobile.addListener(handleMobileChange);
@@ -267,10 +299,8 @@ function menu() {
   };
   function handleDesktopChange(e) {
     if (e.matches) {
-      console.log("Media Query Desktop Matched!");
       desktopMenuHome();
       desktopMenuGlobal();
-      import_luxy.default.init();
     }
     window.addEventListener("scroll", () => {
       let st = window.pageYOffset || document.documentElement.scrollTop;
@@ -514,17 +544,15 @@ if (typeof window !== "undefined") {
 var modal_default = Modal;
 
 // resources/js/cookies.js
-function setCookie(cname, cvalue, exdays) {
+var import_ga_gtag = __toModule(require_lib());
+function setCookie(cname, cvalue) {
   const d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1e3);
+  d.setTime(d.getTime() + 7 * 24 * 60 * 60 * 1e3);
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 function deleteCookie(cname) {
-  const d = new Date();
-  d.setTime(d.getTime() + 24 * 60 * 60 * 1e3);
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=;" + expires + ";path=/";
+  document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 function getCookie(cname) {
   let name = cname + "=";
@@ -543,10 +571,22 @@ function getCookie(cname) {
 }
 function acceptCookieConsent(cookieName, duration) {
   deleteCookie(cookieName);
-  setCookie(cookieName, 1, duration);
+  if (cookieName === "user_cookie_consent") {
+    (0, import_ga_gtag.gtag)("consent", "grant", {
+      ad_storage: "granted",
+      analytics_storage: "granted"
+    });
+  }
+  setCookie(cookieName, 1);
 }
 function handleCookiesAccept(modalNode, modalObject, cookieName, ...rest) {
   let cookie_consent = getCookie(cookieName);
+  if (cookie_consent === "1" && cookieName === "user_cookie_consent") {
+    (0, import_ga_gtag.gtag)("consent", "update", {
+      ad_storage: "granted",
+      analytics_storage: "granted"
+    });
+  }
   if (cookie_consent === "" && cookieName === "user_cookie_consent") {
     setTimeout(() => {
       modalObject.show();
@@ -571,9 +611,8 @@ function handleCookiesAccept(modalNode, modalObject, cookieName, ...rest) {
       return;
     }
     if (e.target.id === "accept") {
-      acceptCookieConsent(cookieName, 0.04);
+      acceptCookieConsent(cookieName);
       const isHiddenPromise = new Promise((resolve, reject) => {
-        console.log("resolved");
         resolve(modalObject.hide());
       });
       isHiddenPromise.then(() => {
@@ -588,29 +627,25 @@ function handleCookiesAccept(modalNode, modalObject, cookieName, ...rest) {
 }
 
 // resources/js/app.js
-window.addEventListener("load", function() {
+var import_ga_gtag2 = __toModule(require_lib());
+window.addEventListener("DOMContentLoaded", function() {
   const pageContent = document.querySelector("#page");
+  const fixedMenuDesktop = document.querySelector("#fixedMenuDesktop");
   pageContent.classList.remove("opacity-0");
   pageContent.classList.add("opacity-100");
+  fixedMenuDesktop.classList.remove("opacity-0");
+  fixedMenuDesktop.classList.add("opacity-100");
   menu();
   const progress = new ProgressScrollBar(document.querySelector("#progressBar"));
   progress.init();
+  (0, import_ga_gtag2.install)("UA-130569087-3", { send_page_view: false });
   scrollAnimations();
   const modalElementCookiesGeneral = document.querySelector("#modalGeneralCookies");
   const modalOptionsCookiesGeneral = {
     placement: "bottom-left",
     backdrop: "dynamic",
     backdropClasses: "bg-gray-900 bg-opacity-50 fixed inset-0 z-40",
-    closable: false,
-    onHide: () => {
-      console.log("modal is hidden");
-    },
-    onShow: () => {
-      console.log("modal is shown");
-    },
-    onToggle: () => {
-      console.log("modal has been toggled");
-    }
+    closable: false
   };
   const modalCookiesGeneral = new modal_default(modalElementCookiesGeneral, modalOptionsCookiesGeneral);
   const modalElementAdultery = document.querySelector("#modalElAdultery");
@@ -618,16 +653,7 @@ window.addEventListener("load", function() {
     placement: "center-center",
     backdrop: "dynamic",
     backdropClasses: "bg-gray-900 bg-opacity-50 backdrop-blur-3xl fixed inset-0 z-40",
-    closable: false,
-    onHide: () => {
-      console.log("modal is hidden");
-    },
-    onShow: () => {
-      console.log("modal is shown");
-    },
-    onToggle: () => {
-      console.log("modal has been toggled");
-    }
+    closable: false
   };
   function handleGeneralCookies() {
     handleCookiesAccept(modalElementCookiesGeneral, modalCookiesGeneral, "user_cookie_consent");
@@ -642,5 +668,22 @@ window.addEventListener("load", function() {
   if (modalElementAdultery) {
     handleCookiesAdultery();
   }
+  console.log(`%c                         
+                             /                  
+                           #/                   
+                           ##                   
+                           ##                   
+                           ##                   
+   /##    ### /### /###    ## /###       /##    
+  / ###    ##/ ###/ /##  / ##/ ###  /   / ###   
+ /   ###    ##  ###/ ###/  ##   ###/   /   ###  
+##    ###   ##   ##   ##   ##    ##   ##    ### 
+########    ##   ##   ##   ##    ##   ########  
+#######     ##   ##   ##   ##    ##   #######   
+##          ##   ##   ##   ##    ##   ##        
+####    /   ##   ##   ##   ##    /#   ####    / 
+ ######/    ###  ###  ###   ####/      ######/  
+  #####      ###  ###  ###   ###        #####   
+`, "font-family:monospace; color: gold;");
 });
 /*! luxy.js v0.0.7 | (c) 2018 Mineo Okuda | MIT License | git+ssh://git@github.com:min30327/luxy.git */

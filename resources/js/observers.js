@@ -10,14 +10,14 @@ export default function createObserverHeroImage() {
 
   const fadeBgImage = (entries, observer) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        heroElement.classList.add("fadeIn");
-        heroElement.classList.remove("fadeOut");
+      if (entry.isIntersecting || isElementInViewport(heroElement)) {
+        heroElement.classList?.add("fadeIn");
+        heroElement.classList?.remove("fadeOut");
       }
 
       if (!entry.isIntersecting) {
-        heroElement.classList.remove("fadeIn");
-        heroElement.classList.add("fadeOut");
+        heroElement.classList?.remove("fadeIn");
+        heroElement.classList?.add("fadeOut");
       }
     });
   };
@@ -112,10 +112,10 @@ export class isElementInterSecting {
   }
 }
 
-export function onMouseOverListener() {
-  document.addEventListener("mouseover", function (e) {
-    if (e.target.classList.contains("zoom-in-out")) {
-      console.log(e.target);
-    }
-  });
-}
+// export function onMouseOverListener() {
+//   document.addEventListener("mouseover", function (e) {
+//     if (e.target.classList.contains("zoom-in-out")) {
+//       console.log(e.target);
+//     }
+//   });
+// }

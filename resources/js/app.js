@@ -2,20 +2,21 @@ import menu from "./menu.js";
 import ProgressScrollBar from "./scroll.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";
-// import { onCLS, onFID, onLCP } from "web-vitals"
+import { install } from "ga-gtag";
+
 import { scrollAnimations } from "./scroll.js";
 
-// onCLS(console.log);
-// onFID(console.log);
-// onLCP(console.log);
-
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   /* show page content with transition */
 
   const pageContent = document.querySelector("#page");
+  const fixedMenuDesktop = document.querySelector("#fixedMenuDesktop");
 
   pageContent.classList.remove("opacity-0");
   pageContent.classList.add("opacity-100");
+
+  fixedMenuDesktop.classList.remove("opacity-0");
+  fixedMenuDesktop.classList.add("opacity-100");
 
   /* menu */
 
@@ -27,6 +28,13 @@ window.addEventListener("load", function () {
     document.querySelector("#progressBar")
   );
   progress.init();
+
+  /* GA */
+  install("UA-130569087-3", { send_page_view: false });
+  // gtag("consent", "default", {
+  //   ad_storage: "denied",
+  //   analytics_storage: "denied",
+  // });
 
   /* scroll animations */
 
@@ -43,15 +51,15 @@ window.addEventListener("load", function () {
     backdrop: "dynamic",
     backdropClasses: "bg-gray-900 bg-opacity-50 fixed inset-0 z-40",
     closable: false,
-    onHide: () => {
-      console.log("modal is hidden");
-    },
-    onShow: () => {
-      console.log("modal is shown");
-    },
-    onToggle: () => {
-      console.log("modal has been toggled");
-    },
+    // onHide: () => {
+    //   console.log("modal is hidden");
+    // },
+    // onShow: () => {
+    //   console.log("modal is shown");
+    // },
+    // onToggle: () => {
+    //   console.log("modal has been toggled");
+    // },
   };
 
   const modalCookiesGeneral = new Modal(
@@ -69,15 +77,15 @@ window.addEventListener("load", function () {
     backdropClasses:
       "bg-gray-900 bg-opacity-50 backdrop-blur-3xl fixed inset-0 z-40",
     closable: false,
-    onHide: () => {
-      console.log("modal is hidden");
-    },
-    onShow: () => {
-      console.log("modal is shown");
-    },
-    onToggle: () => {
-      console.log("modal has been toggled");
-    },
+    // onHide: () => {
+    //   console.log("modal is hidden");
+    // },
+    // onShow: () => {
+    //   console.log("modal is shown");
+    // },
+    // onToggle: () => {
+    //   console.log("modal has been toggled");
+    // },
   };
 
   function handleGeneralCookies() {
@@ -109,4 +117,27 @@ window.addEventListener("load", function () {
   if (modalElementAdultery) {
     handleCookiesAdultery();
   }
+
+  /* Tag */
+
+  console.log(
+    `%c                         
+                             /                  
+                           #/                   
+                           ##                   
+                           ##                   
+                           ##                   
+   /##    ### /### /###    ## /###       /##    
+  / ###    ##/ ###/ /##  / ##/ ###  /   / ###   
+ /   ###    ##  ###/ ###/  ##   ###/   /   ###  
+##    ###   ##   ##   ##   ##    ##   ##    ### 
+########    ##   ##   ##   ##    ##   ########  
+#######     ##   ##   ##   ##    ##   #######   
+##          ##   ##   ##   ##    ##   ##        
+####    /   ##   ##   ##   ##    /#   ####    / 
+ ######/    ###  ###  ###   ####/      ######/  
+  #####      ###  ###  ###   ###        #####   
+`,
+    "font-family:monospace; color: gold;"
+  );
 });

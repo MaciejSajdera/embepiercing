@@ -1,13 +1,7 @@
-<?php
- /* Template Name: Documents Page Template */ 
-?>
-
 <?php get_header(); ?>
 
 	<div class="container my-8 mx-auto">
-
-	<?php echo get_template_part('/template-parts/partials/page-header'); ?>
-
+		
 	<?php if ( have_posts() ) : ?>
 
 		<?php
@@ -15,7 +9,7 @@
 			the_post();
 			?>
 
-			<?php get_template_part( 'template-parts/content', 'single' ); ?>
+			<?php get_template_part( 'template-parts/content', 'blog-post' ); ?>
 
 			<?php
 			// If comments are open or we have at least one comment, load up the comment template.

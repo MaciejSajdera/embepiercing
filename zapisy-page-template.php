@@ -1,5 +1,5 @@
 <?php
- /* Template Name: Contact Page Template */ 
+ /* Template Name: Zapisy Page Template */ 
 ?>
 
 <?php get_header(); ?>
@@ -24,12 +24,11 @@
     </section>
 
     <section class="mb-16">
-    <div id="contactForm">
-        <?php echo FrmFormsController::get_form_shortcode( array( 'id' => 2 ) ); ?>
-    </div>
+        <div id="bookingForm">
+            <?php echo FrmFormsController::get_form_shortcode( array( 'id' => 4 ) ); ?>
+        </div>
 
-    <?php get_template_part('template-parts/partials/booksy-widget'); ?>
-
+        <?php get_template_part( 'template-parts/partials/booksy-widget'); ?>
     </section>
 
 </div>

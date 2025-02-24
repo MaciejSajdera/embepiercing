@@ -1,7 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // mode: "jit",
-  content: ["./**/*.php", "./**/**/*.php", "./*.php", "*.php", "./js/app.js"],
+  mode: "jit",
+  content: [
+    "./**/*.php",
+    "./**/**/*.php",
+    "./**/**/**/*.php",
+    "./*.php",
+    "*.php",
+    "./js/app.js",
+  ],
   presets: [],
   darkMode: "media", // or 'class'
   theme: {
@@ -11,6 +18,7 @@ module.exports = {
       lg: "1024px",
       xl: "1280px",
       "2xl": "1536px",
+      "3xl": "1900px",
     },
     supports: {},
     colors: ({ colors }) => ({
@@ -259,8 +267,8 @@ module.exports = {
         DEFAULT: "1rem",
         sm: "2rem",
         lg: "4rem",
-        xl: "5rem",
-        "2xl": "6rem",
+        xl: "14rem",
+        "2xl": "16rem",
       },
     },
     content: {

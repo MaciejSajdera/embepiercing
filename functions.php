@@ -36,22 +36,41 @@ add_action( 'after_setup_theme', 'embepiercing_setup' );
  * Enqueue theme assets.
  */
 function embepiercing_enqueue_scripts() {
-	$theme = wp_get_theme();
 
-	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), $theme->get( 'Version' ) );
-	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), $theme->get( 'Version' ) );
-	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), '1.618' );
+	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), '1.618' );
 
 	if (is_front_page()) {
-		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), $theme->get( 'Version' ) );
+		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), '1.618' );
 	}
 
+	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), '1.618' );
+
 	if (is_post_type_archive('faq')) {
-		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), $theme->get( 'Version' ) );
+		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), '1.618' );
 	}
 }
 
 add_action( 'wp_enqueue_scripts', 'embepiercing_enqueue_scripts' );
+
+add_theme_support('category-thumbnails');
+
+add_theme_support( 'post-thumbnails' );
+
+/**
+ * Defer the reCAPTCHA script until after the page loads
+ *
+ * @link https://wpforms.com/developers/how-to-defer-the-recaptcha-script/
+ */
+ 
+ function defer_recaptcha_scripts( $tag, $handle ) {
+    if ( 'google-recaptcha' === $handle ) {
+        return str_replace( ' src', ' defer="defer" src', $tag );
+    }
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'defer_recaptcha_scripts', 10, 2 );
+
 
 /**
  * Get asset path.
@@ -68,8 +87,29 @@ function embepiercing_asset( $path ) {
 	return add_query_arg( 'time', time(),  get_stylesheet_directory_uri() . '/' . $path );
 }
 
+function my_login_logo_one() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	$image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+?>
+<style type="text/css">
+body.login div#login h1 a {
+    background-image: url(<?php echo $image[0]; ?>);
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    padding-bottom: 30px;
+}
+</style>
+<?php
+}
+add_action( 'login_enqueue_scripts', 'my_login_logo_one' );
+
 
 /* UTILITIES */
+
+add_filter( 'generate_google_font_display', function() {
+    return 'swap';
+} );
 
 add_filter( 'get_the_archive_title', function ($title) {
 	if ( is_category() ) {
@@ -86,20 +126,20 @@ add_filter( 'get_the_archive_title', function ($title) {
 	return $title;
 });
 
-add_filter( 'get_the_title', function ($title) {
-	if ( is_category() ) {
-	  $title = single_cat_title( '', false );
-	} elseif ( is_tag() ) {
-	  $title = single_tag_title( '', false );
-	} elseif ( is_author() ) {
-	  $title = '<span class="vcard">' . get_the_author() . '</span>' ;
-	} elseif ( is_tax() ) { //for custom post types
-	  $title = sprintf( __( '%1$s' ), single_term_title( '', false ) );
-	} elseif (is_post_type_archive()) {
-	  $title = post_type_archive_title( '', false );
-	}
-	return $title;
-});
+// add_filter( 'get_the_title', function ($title) {
+// 	if ( is_category() ) {
+// 	  $title = single_cat_title( '', false );
+// 	} elseif ( is_tag() ) {
+// 	  $title = single_tag_title( '', false );
+// 	} elseif ( is_author() ) {
+// 	  $title = '<span class="vcard">' . get_the_author() . '</span>' ;
+// 	} elseif ( is_tax() ) { //for custom post types
+// 	  $title = sprintf( __( '%1$s' ), single_term_title( '', false ) );
+// 	} elseif (is_post_type_archive()) {
+// 	  $title = post_type_archive_title( '', false );
+// 	}
+// 	return $title;
+// });
 
 
 function header_copyright()
@@ -271,6 +311,15 @@ class Has_Child_Walker_Nav_Menu extends Walker_Nav_Menu
 		);
 	}
 }
+
+/* excerpt */
+
+function new_excerpt_more( $more ) {
+	return '...';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
+//YOAST
 
 function set_custom_facebook_image_size( $img_size ) { return 'large' ; };
 add_filter( 'wpseo_opengraph_image_size' , 'set_custom_facebook_image_size' );

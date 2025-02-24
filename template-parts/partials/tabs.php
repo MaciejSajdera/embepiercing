@@ -26,8 +26,8 @@ $posts = $args['posts'];
                 </button>
             </h2>
             <div id="accordion-color-body-<?php echo $i; ?>" class="hidden" aria-labelledby="accordion-color-heading-<?php echo $i; ?>">
-                <div class="accordion__body p-5 border-2 border-b-0 border-t-0 border-gray-200">
-                    <p class="mb-2 prose text-2xl"><?php echo $post_content; ?></p>
+                <div class="accordion__body p-5 border-2 border-b-0 border-t-0 border-gray-200 prose text-xl">
+                    <?php echo $post_content; ?>
                 </div>
             </div>
             </div>

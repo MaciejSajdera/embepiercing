@@ -17,8 +17,29 @@ function revealTitle() {
 }
 
 // Navigation toggle
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   createObserverHeroImage();
   createObserverZoomInOutImgs();
   revealTitle();
+
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("reveal-more")) {
+      e.preventDefault();
+      const trimmedNode = e.target.closest(
+        ".entry-content--revealFullOnMobile"
+      );
+
+      const revealButton = trimmedNode.querySelector(".reveal-more");
+
+      trimmedNode.classList.toggle("entry-content--revealed");
+
+      if (revealButton.dataset.show === "true") {
+        revealButton.dataset.show = "false";
+        revealButton.innerHTML = "Czytaj więcej";
+      } else {
+        revealButton.dataset.show = "true";
+        revealButton.innerHTML = "Zwiń";
+      }
+    }
+  });
 });

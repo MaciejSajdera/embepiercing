@@ -1,64 +1,134 @@
-#contactForm {
+#contactForm,
+#bookingForm {
   margin: auto;
 }
 
-.home-page-template #contactForm {
-  max-width: 1024px;
+#contactForm,
+#bookingForm {
+  max-width: 768px;
 }
 
-#contactForm * {
-  font-size: clamp(3rem, 1.25vw, 3.75rem) !important;
+#contactForm label {
+  font-size: 1.5rem !important;
+}
+
+#bookingForm label {
+  font-size: 1.5rem !important;
 }
 
 #contactForm input[type="text"],
-input[type="email"],
-textarea {
-  background: transparent;
-  background-color: transparent !important;
+#contactForm input[type="email"],
+#contactForm textarea,
+#contactForm input[type="tel"],
+#bookingForm input[type="text"],
+#bookingForm input[type="email"],
+#bookingForm textarea,
+#bookingForm input[type="tel"] {
+  background-color: #c8c5c517 !important;
   width: 100%;
-  padding: 32px !important;
   border: none !important;
   border-bottom: 2px solid lightgray !important;
   border-radius: 4px;
   box-sizing: border-box;
   resize: vertical;
   box-shadow: none !important;
+  font-size: 1.25rem !important;
+}
+#contactForm input[type="text"],
+#contactForm input[type="email"],
+#contactForm textarea,
+#contactForm input[type="tel"] {
+  padding: 26px !important;
   color: white !important;
 }
 
+#bookingForm input[type="text"],
+#bookingForm input[type="email"],
+#bookingForm textarea,
+#bookingForm input[type="tel"] {
+  padding: 26px !important;
+  color: white !important;
+}
+
+#contactForm input[type="radio"] {
+  margin: 0 0.5rem;
+}
+
 #contactForm .form-field {
-  margin-bottom: 6rem !important;
+  margin-bottom: 2rem !important;
 }
 
-#contactForm label {
+#bookingForm .form-field {
+  margin-bottom: 2rem !important;
+}
+
+#bookingForm .form-field.vertical_radio {
+  margin-bottom: 1rem !important;
+}
+
+#bookingForm .frm_primary_label {
+  padding: 0 1rem 1rem;
+  @apply text-xl text-gold;
+}
+
+#bookingForm .frm_opt_container {
+  padding: 0 1rem;
+}
+
+#bookingForm .frm_radio {
+  @apply text-gold;
+}
+
+#bookingForm input[type="radio"] {
+  margin-bottom: 9px;
+}
+
+#bookingForm .frm_radio label {
+  cursor: pointer;
   color: white;
-  padding: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-#contactForm .frm_error {
+#contactForm .frm_error,
+#bookingForm .frm_error {
   margin-top: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
-#contactForm .frm_required {
+#contactForm .frm_required,
+#bookingForm .frm_required {
   display: none;
 }
 
-#contactForm .frm_submit {
+#contactForm .frm_submit,
+#bookingForm .frm_submit {
   display: flex;
   justify-content: center;
-  margin-top: 4rem;
+}
+
+#contactForm .frm_button_submit,
+#bookingForm .frm_button_submit {
+  background: transparent !important;
+  padding: 1em 2.5em;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  box-shadow: none;
 }
 
 #contactForm .frm_button_submit {
-  background: transparent !important;
-  padding: 2.5rem 25%;
   border: 4px solid white;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
+}
+
+#bookingForm .frm_button_submit {
+  border: 4px solid rgb(224, 197, 110);
 }
 
 #contactForm .frm_button_submit:hover {
   background: white !important;
   color: black;
+}
+
+#bookingForm .frm_button_submit:hover {
+  background: rgb(224, 197, 110) !important;
+  color: white;
 }

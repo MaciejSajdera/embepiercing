@@ -8,13 +8,13 @@ function createObserverHeroImage() {
   };
   const fadeBgImage = (entries, observer) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        heroElement.classList.add("fadeIn");
-        heroElement.classList.remove("fadeOut");
+      if (entry.isIntersecting || isElementInViewport(heroElement)) {
+        heroElement.classList?.add("fadeIn");
+        heroElement.classList?.remove("fadeOut");
       }
       if (!entry.isIntersecting) {
-        heroElement.classList.remove("fadeIn");
-        heroElement.classList.add("fadeOut");
+        heroElement.classList?.remove("fadeIn");
+        heroElement.classList?.add("fadeOut");
       }
     });
   };
@@ -48,6 +48,19 @@ function createObserverZoomInOutImgs() {
     });
   }
 }
+var isElementInViewport = (el) => {
+  const scroll = window.scrollY || window.pageYOffset;
+  const boundsTop = el.getBoundingClientRect().top + scroll;
+  const viewport = {
+    top: scroll,
+    bottom: scroll + window.innerHeight
+  };
+  const bounds = {
+    top: boundsTop,
+    bottom: boundsTop + el.clientHeight
+  };
+  return bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom || bounds.top <= viewport.bottom && bounds.top >= viewport.top;
+};
 
 // resources/js/home.js
 function revealTitle() {
@@ -61,8 +74,23 @@ function revealTitle() {
     }
   });
 }
-window.addEventListener("load", function() {
+window.addEventListener("DOMContentLoaded", function() {
   createObserverHeroImage();
   createObserverZoomInOutImgs();
   revealTitle();
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("reveal-more")) {
+      e.preventDefault();
+      const trimmedNode = e.target.closest(".entry-content--revealFullOnMobile");
+      const revealButton = trimmedNode.querySelector(".reveal-more");
+      trimmedNode.classList.toggle("entry-content--revealed");
+      if (revealButton.dataset.show === "true") {
+        revealButton.dataset.show = "false";
+        revealButton.innerHTML = "Czytaj wi\u0119cej";
+      } else {
+        revealButton.dataset.show = "true";
+        revealButton.innerHTML = "Zwi\u0144";
+      }
+    }
+  });
 });
