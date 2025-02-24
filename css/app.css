@@ -1946,21 +1946,6 @@ input[type="range"]::-ms-fill-lower {
   will-change: transform;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-
-body {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
 a {
   transition: color 0.2s ease-in-out;
 }
@@ -2569,12 +2554,16 @@ header h1.title-reveal--revealed {
   max-width: 768px;
 }
 
-#contactForm label {
+#contactForm .frm_primary_label {
   font-size: 1.5rem !important;
+  --tw-text-opacity: 1;
+  color: rgb(224 197 110 / var(--tw-text-opacity, 1));
 }
 
-#bookingForm label {
+#bookingForm .frm_primary_label {
   font-size: 1.5rem !important;
+  --tw-text-opacity: 1;
+  color: rgb(224 197 110 / var(--tw-text-opacity, 1));
 }
 
 #contactForm input[type="text"],
@@ -2596,11 +2585,26 @@ header h1.title-reveal--revealed {
   font-size: 1.25rem !important;
 }
 
+#contactForm input[type="text"]::-moz-placeholder, #contactForm input[type="email"]::-moz-placeholder, #contactForm textarea::-moz-placeholder, #contactForm input[type="tel"]::-moz-placeholder, #bookingForm input[type="text"]::-moz-placeholder, #bookingForm input[type="email"]::-moz-placeholder, #bookingForm textarea::-moz-placeholder, #bookingForm input[type="tel"]::-moz-placeholder {
+  font-size: inherit !important;
+}
+
+#contactForm input[type="text"]::placeholder,
+#contactForm input[type="email"]::placeholder,
+#contactForm textarea::placeholder,
+#contactForm input[type="tel"]::placeholder,
+#bookingForm input[type="text"]::placeholder,
+#bookingForm input[type="email"]::placeholder,
+#bookingForm textarea::placeholder,
+#bookingForm input[type="tel"]::placeholder {
+  font-size: inherit !important;
+}
+
 #contactForm input[type="text"],
 #contactForm input[type="email"],
 #contactForm textarea,
 #contactForm input[type="tel"] {
-  padding: 26px !important;
+  padding: 18px !important;
   color: white !important;
 }
 
@@ -2608,7 +2612,7 @@ header h1.title-reveal--revealed {
 #bookingForm input[type="email"],
 #bookingForm textarea,
 #bookingForm input[type="tel"] {
-  padding: 26px !important;
+  padding: 18px !important;
   color: white !important;
 }
 
@@ -2628,23 +2632,6 @@ header h1.title-reveal--revealed {
   margin-bottom: 1rem !important;
 }
 
-#bookingForm .frm_primary_label {
-  padding: 0 1rem 1rem;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(224 197 110 / var(--tw-text-opacity, 1));
-}
-
-#bookingForm .frm_opt_container {
-  padding: 0 1rem;
-}
-
-#bookingForm .frm_radio {
-  --tw-text-opacity: 1;
-  color: rgb(224 197 110 / var(--tw-text-opacity, 1));
-}
-
 #bookingForm input[type="radio"] {
   margin-bottom: 9px;
 }
@@ -2653,12 +2640,15 @@ header h1.title-reveal--revealed {
   cursor: pointer;
   color: white;
   margin-bottom: 1rem;
+  font-size: 1.25rem;
 }
 
 #contactForm .frm_error,
 #bookingForm .frm_error {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   padding: 1rem;
+  color: #b94a48 !important;
+  font-size: 1rem !important;
 }
 
 #contactForm .frm_required,
@@ -2679,6 +2669,7 @@ header h1.title-reveal--revealed {
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
   box-shadow: none;
+  font-size: 1.5rem;
 }
 
 #contactForm .frm_button_submit {

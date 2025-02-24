@@ -8,12 +8,14 @@
   max-width: 768px;
 }
 
-#contactForm label {
+#contactForm .frm_primary_label {
   font-size: 1.5rem !important;
+  @apply text-gold;
 }
 
-#bookingForm label {
+#bookingForm .frm_primary_label {
   font-size: 1.5rem !important;
+  @apply text-gold;
 }
 
 #contactForm input[type="text"],
@@ -34,11 +36,23 @@
   box-shadow: none !important;
   font-size: 1.25rem !important;
 }
+
+#contactForm input[type="text"]::placeholder,
+#contactForm input[type="email"]::placeholder,
+#contactForm textarea::placeholder,
+#contactForm input[type="tel"]::placeholder,
+#bookingForm input[type="text"]::placeholder,
+#bookingForm input[type="email"]::placeholder,
+#bookingForm textarea::placeholder,
+#bookingForm input[type="tel"]::placeholder {
+  font-size: inherit !important;
+}
+
 #contactForm input[type="text"],
 #contactForm input[type="email"],
 #contactForm textarea,
 #contactForm input[type="tel"] {
-  padding: 26px !important;
+  padding: 18px !important;
   color: white !important;
 }
 
@@ -46,7 +60,7 @@
 #bookingForm input[type="email"],
 #bookingForm textarea,
 #bookingForm input[type="tel"] {
-  padding: 26px !important;
+  padding: 18px !important;
   color: white !important;
 }
 
@@ -66,19 +80,6 @@
   margin-bottom: 1rem !important;
 }
 
-#bookingForm .frm_primary_label {
-  padding: 0 1rem 1rem;
-  @apply text-xl text-gold;
-}
-
-#bookingForm .frm_opt_container {
-  padding: 0 1rem;
-}
-
-#bookingForm .frm_radio {
-  @apply text-gold;
-}
-
 #bookingForm input[type="radio"] {
   margin-bottom: 9px;
 }
@@ -87,12 +88,15 @@
   cursor: pointer;
   color: white;
   margin-bottom: 1rem;
+  font-size: 1.25rem;
 }
 
 #contactForm .frm_error,
 #bookingForm .frm_error {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   padding: 1rem;
+  color: #b94a48 !important;
+  font-size: 1rem !important;
 }
 
 #contactForm .frm_required,
@@ -113,6 +117,7 @@
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
   box-shadow: none;
+  font-size: 1.5rem;
 }
 
 #contactForm .frm_button_submit {

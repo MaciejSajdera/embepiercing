@@ -316,68 +316,6 @@ function menu() {
   handleDesktopChange(mediaQueryDesktop);
 }
 
-// resources/js/observers.js
-var isElementInViewport = (el) => {
-  const scroll = window.scrollY || window.pageYOffset;
-  const boundsTop = el.getBoundingClientRect().top + scroll;
-  const viewport = {
-    top: scroll,
-    bottom: scroll + window.innerHeight
-  };
-  const bounds = {
-    top: boundsTop,
-    bottom: boundsTop + el.clientHeight
-  };
-  return bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom || bounds.top <= viewport.bottom && bounds.top >= viewport.top;
-};
-
-// resources/js/revealNodes.js
-var RevealChildrenOf = class {
-  constructor(elementsParent, delayTime) {
-    this.elementsParent = elementsParent;
-    this.delayTime = delayTime;
-    if (!elementsParent) {
-      return;
-    }
-    this.hide();
-    isElementInViewport(this.elementsParent) ? this.reveal() : document.addEventListener("scroll", () => {
-      this.reveal();
-    });
-  }
-  hide() {
-    this.elementsParent.children ? [...this.elementsParent.children].map((element, i) => {
-      element.style.opacity = "0";
-    }) : "";
-  }
-  reveal() {
-    isElementInViewport(this.elementsParent) && this.elementsParent.children ? [...this.elementsParent.children].map((element, i) => {
-      element.style.transitionDelay = `${i / this.delayTime}s`;
-      element.style.opacity = "1";
-    }) : "";
-  }
-};
-
-// resources/js/scroll.js
-var ProgressScrollBar = class {
-  constructor(element) {
-    this.element = element;
-  }
-  init() {
-    const progressIndicator = this.element;
-    const totalHeight = document.body.scrollHeight - window.innerHeight;
-    window.onscroll = function() {
-      const progressIndicatorHeight = window.pageYOffset / totalHeight * 100;
-      progressIndicator.style.height = progressIndicatorHeight + "%";
-    };
-  }
-};
-function scrollAnimations() {
-  const allRevealChildrenOfTrigger = document.querySelectorAll(".reveal-from__trigger");
-  allRevealChildrenOfTrigger && allRevealChildrenOfTrigger.forEach((element) => {
-    new RevealChildrenOf(element, 10);
-  });
-}
-
 // resources/js/modal.js
 var __assign = function() {
   __assign = Object.assign || function(t) {
@@ -628,6 +566,57 @@ function handleCookiesAccept(modalNode, modalObject, cookieName, ...rest) {
 
 // resources/js/app.js
 var import_ga_gtag2 = __toModule(require_lib());
+
+// resources/js/observers.js
+var isElementInViewport = (el) => {
+  const scroll = window.scrollY || window.pageYOffset;
+  const boundsTop = el.getBoundingClientRect().top + scroll;
+  const viewport = {
+    top: scroll,
+    bottom: scroll + window.innerHeight
+  };
+  const bounds = {
+    top: boundsTop,
+    bottom: boundsTop + el.clientHeight
+  };
+  return bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom || bounds.top <= viewport.bottom && bounds.top >= viewport.top;
+};
+
+// resources/js/revealNodes.js
+var RevealChildrenOf = class {
+  constructor(elementsParent, delayTime) {
+    this.elementsParent = elementsParent;
+    this.delayTime = delayTime;
+    if (!elementsParent) {
+      return;
+    }
+    this.hide();
+    isElementInViewport(this.elementsParent) ? this.reveal() : document.addEventListener("scroll", () => {
+      this.reveal();
+    });
+  }
+  hide() {
+    this.elementsParent.children ? [...this.elementsParent.children].map((element, i) => {
+      element.style.opacity = "0";
+    }) : "";
+  }
+  reveal() {
+    isElementInViewport(this.elementsParent) && this.elementsParent.children ? [...this.elementsParent.children].map((element, i) => {
+      element.style.transitionDelay = `${i / this.delayTime}s`;
+      element.style.opacity = "1";
+    }) : "";
+  }
+};
+
+// resources/js/scroll.js
+function scrollAnimations() {
+  const allRevealChildrenOfTrigger = document.querySelectorAll(".reveal-from__trigger");
+  allRevealChildrenOfTrigger && allRevealChildrenOfTrigger.forEach((element) => {
+    new RevealChildrenOf(element, 10);
+  });
+}
+
+// resources/js/app.js
 window.addEventListener("DOMContentLoaded", function() {
   const pageContent = document.querySelector("#page");
   const fixedMenuDesktop = document.querySelector("#fixedMenuDesktop");
@@ -636,8 +625,6 @@ window.addEventListener("DOMContentLoaded", function() {
   fixedMenuDesktop.classList.remove("opacity-0");
   fixedMenuDesktop.classList.add("opacity-100");
   menu();
-  const progress = new ProgressScrollBar(document.querySelector("#progressBar"));
-  progress.init();
   (0, import_ga_gtag2.install)("UA-130569087-3", { send_page_view: false });
   scrollAnimations();
   const modalElementCookiesGeneral = document.querySelector("#modalGeneralCookies");

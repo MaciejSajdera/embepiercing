@@ -1,5 +1,4 @@
 import menu from "./menu.js";
-import ProgressScrollBar from "./scroll.js";
 import Modal from "./modal.js";
 import { handleCookiesAccept } from "./cookies.js";
 import { install } from "ga-gtag";
@@ -24,10 +23,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
   /* progress bar */
 
-  const progress = new ProgressScrollBar(
-    document.querySelector("#progressBar")
-  );
-  progress.init();
+  // const progress = new ProgressScrollBar(
+  //   document.querySelector("#progressBar")
+  // );
+  // progress.init();
 
   /* GA */
   install("UA-130569087-3", { send_page_view: false });
