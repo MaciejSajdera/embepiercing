@@ -18,8 +18,12 @@
         </h2>
         <?php
 
-        if ( $term_single->name !== 'Konsultacje' ) {
-            echo '<p class="mb-4">Cena zawiera tytanową biżuterię w kolorze srebrnym. W ofercie mamy możliwość założenia kolorowej tytanowej biżuterii, kolor uzyskany jest poprzez proces anodyzacji. Koszt anodyzacji to 30 zł za jeden kolczyk.</p>';
+        if ( $term_single->description ) {
+            ?>
+            <div class="pb-4">
+                <?php echo $term_single->description; ?>
+            </div>
+            <?php
         }
 
         $args = array(  

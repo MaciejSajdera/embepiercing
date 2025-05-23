@@ -37,17 +37,17 @@ add_action( 'after_setup_theme', 'embepiercing_setup' );
  */
 function embepiercing_enqueue_scripts() {
 
-	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), '1.625' );
-	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), '1.625' );
+	wp_enqueue_style( 'embepiercing', embepiercing_asset( 'css/app.css' ), array(), '1.626' );
+	wp_enqueue_style( 'fonts', embepiercing_asset( 'css/typography.css' ), array(), '1.626' );
 
 	if (is_front_page()) {
-		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), '1.625' );
+		wp_enqueue_script( 'home', embepiercing_asset( 'js/home.js' ), array(), '1.626' );
 	}
 
-	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), '1.625' );
+	wp_enqueue_script( 'embepiercing', embepiercing_asset( 'js/app.js' ), array(), '1.626' );
 
 	if (is_post_type_archive('faq')) {
-		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), '1.625' );
+		wp_enqueue_script( 'faq', embepiercing_asset( 'js/faq.js' ), array(), '1.626' );
 	}
 }
 

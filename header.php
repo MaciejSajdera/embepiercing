@@ -36,7 +36,7 @@
 
     <?php echo get_template_part('/template-parts/partials/modal-cookies-general'); ?>
 
-    <div id="progressBar"></div>
+    <!-- <div id="progressBar"></div> -->
 
     <!-- desktop menu -->
 
